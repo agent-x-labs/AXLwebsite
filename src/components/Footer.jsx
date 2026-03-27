@@ -21,9 +21,9 @@ const Footer = ({ theme }) => {
           className="space-y-5 text-sm text-gray-700 dark:text-gray-400"
         >
           <img
-            src={theme === "dark" ? assets.logo_dark : assets.logo}
-            alt=""
-            className="w-32 sm:w-44"
+            src={assets.logo}
+            alt="Agent X Labs"
+            className={`w-32 sm:w-44 ${theme === "dark" ? "brightness-[2]" : ""}`}
           />
           <p className="max-w-md">
             From strategy to execution, we craft digital solutions that move
@@ -86,16 +86,7 @@ const Footer = ({ theme }) => {
       transition={{ duration: 0.5, delay: 0.4}}
       viewport={{once: true}}
       className="pb-6 text-sm text-gray-500 flex justify-center sm:justify-between gap-4 flex-wrap">
-        <p>Copyright 2025 © agency.ai - All Right Reserved.</p>
-        <p>
-          <a href="https://amdadislam.netlify.app/">Developed By Amdad Islam</a>
-        </p>
-        <div className="flex items-center justify-between gap-4">
-          <img src={assets.facebook_icon} alt="" />
-          <img src={assets.twitter_icon} alt="" />
-          <img src={assets.instagram_icon} alt="" />
-          <img src={assets.linkedin_icon} alt="" />
-        </div>
+        <p>Copyright 2026 © Agent X Labs - All Rights Reserved.</p>
       </motion.div>
     </motion.div>
   );

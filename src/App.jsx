@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import TrustedBy from './components/TrustedBy'
@@ -9,22 +9,12 @@ import ContactUs from './components/ContactUs'
 import { Toaster } from 'react-hot-toast'
 import Footer from './components/Footer'
 
-const getInitialTheme = () => {
-  const saved = localStorage.getItem('theme')
-  if (saved === 'dark' || saved === 'light') return saved
-  if (typeof window !== 'undefined') {
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-  }
-  return 'light'
-}
-
 const App = () => {
-  const [theme, setTheme] = useState(getInitialTheme)
+  const theme = 'dark'
 
   useEffect(() => {
-    document.documentElement.classList.toggle('dark', theme === 'dark')
-    localStorage.setItem('theme', theme)
-  }, [theme])
+    document.documentElement.classList.add('dark')
+  }, [])
 
   const dotRef = useRef(null)
   const outlineRef = useRef(null)
@@ -61,7 +51,7 @@ const App = () => {
   return (
     <div className="relative  bg-white dark:bg-black transition-colors">
       <Toaster />
-      <Navbar theme={theme} setTheme={setTheme} />
+      <Navbar theme={theme} />
       <Hero />
       <TrustedBy />
       <Services />

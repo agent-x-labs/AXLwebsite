@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import assets from "../assets/assets";
-import ThemeToggleBtn from "./ThemeToggleBtn";
+
 import { motion } from "framer-motion";
 
-const Navbar = ({ theme, setTheme }) => {
+const Navbar = ({ theme }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
@@ -15,9 +15,9 @@ const Navbar = ({ theme, setTheme }) => {
     >
       {/* Logo */}
       <img
-        src={theme === "dark" ? assets.logo_dark : assets.logo}
-        alt="logo"
-        className="w-32 sm:w-40"
+        src={assets.logo}
+        alt="Agent X Labs"
+        className={`w-32 sm:w-40 ${theme === "dark" ? "brightness-[2]" : ""}`}
       />
 
       {/* Sidebar / Menu Links */}
@@ -49,9 +49,6 @@ const Navbar = ({ theme, setTheme }) => {
 
       {/* Right Side Controls */}
       <div className="flex items-center gap-2 sm:gap-4">
-        {/* Theme Toggle */}
-        <ThemeToggleBtn theme={theme} setTheme={setTheme} />
-
         {/* Mobile Menu Button */}
         <img
           src={theme === "dark" ? assets.menu_icon_dark : assets.menu_icon}
@@ -65,7 +62,7 @@ const Navbar = ({ theme, setTheme }) => {
           href="#contact-us"
           className="text-sm hidden sm:flex items-center gap-2 bg-primary text-white px-6 py-2 rounded-full cursor-pointer hover:scale-105 transition-transform"
         >
-          Contact <img src={assets.arrow_icon} width={14} alt="arrow" />
+          Book Free Strategy Call <img src={assets.arrow_icon} width={14} alt="arrow" />
         </a>
       </div>
     </motion.div>
