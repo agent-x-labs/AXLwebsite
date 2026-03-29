@@ -26,32 +26,8 @@ const Footer = ({ theme }) => {
             className={`w-32 sm:w-44 ${theme === "dark" ? "brightness-[2]" : ""}`}
           />
           <p className="max-w-md">
-            From strategy to execution, we craft digital solutions that move
-            your business forward.
+            Turn missed calls, dead leads, and silent customers into revenue - on autopilot.
           </p>
-
-          <ul className="flex gap-8">
-            <li>
-              <a className="hover:text-primary" href="#hero">
-                Home
-              </a>
-            </li>
-            <li>
-              <a className="hover:text-primary" href="#services">
-                Services
-              </a>
-            </li>
-            <li>
-              <a className="hover:text-primary" href="#our-work">
-                Our work
-              </a>
-            </li>
-            <li>
-              <a className="hover:text-primary" href="#contact-us">
-                Contact Us
-              </a>
-            </li>
-          </ul>
         </motion.div>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -86,7 +62,7 @@ const Footer = ({ theme }) => {
       transition={{ duration: 0.5, delay: 0.4}}
       viewport={{once: true}}
       className="pb-6 text-sm text-gray-500 flex justify-center sm:justify-between gap-4 flex-wrap">
-        <p>Copyright 2026 © Agent X Labs - All Rights Reserved.</p>
+        <p>Copyright 2026 © Agent X Labs LTD - All Rights Reserved.</p>
       </motion.div>
     </motion.div>
   );
