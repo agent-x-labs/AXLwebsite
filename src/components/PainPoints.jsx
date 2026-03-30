@@ -409,9 +409,10 @@ const CallsScene = ({ isPlaying = false }) => {
 }
 
 const FollowUpScene = ({ isPlaying = false }) => {
-  const responseMinutes = useMotionValue(5)
-  const primaryWarmthScale = useTransform(responseMinutes, [5, 1440], [0.92, 0.28])
-  const secondaryWarmthScale = useTransform(responseMinutes, [5, 1440], [0.7, 0.16])
+  const warmthLevel = useMotionValue(1)
+  const responseMinutes = useTransform(warmthLevel, [1, 0], [5, 1440])
+  const primaryWarmthScale = useTransform(warmthLevel, [0, 1], [0.16, 1])
+  const secondaryWarmthScale = useTransform(warmthLevel, [0, 1], [0.08, 0.76])
   const [responseLabel, setResponseLabel] = useState('5m')
 
   useMotionValueEvent(responseMinutes, 'change', (latest) => {
@@ -420,20 +421,20 @@ const FollowUpScene = ({ isPlaying = false }) => {
 
   useEffect(() => {
     if (!isPlaying) {
-      responseMinutes.set(5)
+      warmthLevel.set(1)
       setResponseLabel('5m')
       return undefined
     }
 
-    const controls = animate(responseMinutes, [5, 59, 60, 1440, 60, 59, 5], {
+    const controls = animate(warmthLevel, [1, 1, 0, 0, 1, 1], {
       duration: 4.8,
       ease: 'linear',
       repeat: Infinity,
-      times: [0, 0.22, 0.24, 0.5, 0.76, 0.78, 1],
+      times: [0, 0.18, 0.5, 0.68, 0.82, 1],
     })
 
     return () => controls.stop()
-  }, [isPlaying, responseMinutes])
+  }, [isPlaying, warmthLevel])
 
   return (
     <SceneFrame>
