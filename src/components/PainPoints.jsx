@@ -92,6 +92,87 @@ const RevenueChip = ({ x, y, animate, transition }) => (
   </div>
 )
 
+const followUpStages = [
+  {
+    label: 'Quote sent',
+    icon: 'quote-sent',
+    iconClassName: 'border-primary/35 bg-primary/[0.14] text-primary',
+  },
+  {
+    label: 'No reply',
+    icon: 'no-reply',
+    iconClassName: 'border-white/12 bg-white/[0.04] text-white/72',
+  },
+  {
+    label: 'Deal lost',
+    icon: 'deal-lost',
+    iconClassName: 'border-rose-300/18 bg-rose-300/[0.08] text-rose-200/76',
+  },
+]
+
+const FollowUpStageIcon = ({ icon, className = 'h-3.5 w-3.5' }) => {
+  if (icon === 'quote-sent') {
+    return (
+      <svg viewBox="0 0 20 20" className={className} fill="none" aria-hidden="true">
+        <path d="M4.5 10h6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+        <path d="M8 6.5 11.5 10 8 13.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        <rect x="3.25" y="4.25" width="13.5" height="11.5" rx="3.75" stroke="currentColor" strokeWidth="1.2" opacity="0.8" />
+      </svg>
+    )
+  }
+
+  if (icon === 'no-reply') {
+    return (
+      <svg viewBox="0 0 20 20" className={className} fill="none" aria-hidden="true">
+        <path d="M5.25 6.25h9.5a2 2 0 0 1 2 2v3.5a2 2 0 0 1-2 2H10l-3.5 2v-2H5.25a2 2 0 0 1-2-2v-3.5a2 2 0 0 1 2-2Z" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round" />
+        <circle cx="7.3" cy="10" r="0.9" fill="currentColor" />
+        <circle cx="10" cy="10" r="0.9" fill="currentColor" />
+        <circle cx="12.7" cy="10" r="0.9" fill="currentColor" />
+      </svg>
+    )
+  }
+
+  return (
+    <svg viewBox="0 0 20 20" className={className} fill="none" aria-hidden="true">
+      <circle cx="10" cy="10" r="6.2" stroke="currentColor" strokeWidth="1.2" />
+      <path d="M7.2 7.2 12.8 12.8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M12.8 7.2 7.2 12.8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  )
+}
+
+const FollowUpStageCard = ({ stage, opacity, isAnimated = false, delay = 0 }) => {
+  const cardClassName = "rounded-[22px] border border-white/10 bg-white/[0.03] px-2.5 py-3 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]"
+  const content = (
+    <div className="flex flex-col items-center gap-2">
+      <span className={`flex size-8 items-center justify-center rounded-full border ${stage.iconClassName}`}>
+        <FollowUpStageIcon icon={stage.icon} />
+      </span>
+      <span className="text-[10px] font-semibold uppercase leading-[1.15] tracking-[0.12em] text-white/62">
+        {stage.label}
+      </span>
+    </div>
+  )
+
+  if (!isAnimated) {
+    return (
+      <div className={cardClassName} style={{ opacity }}>
+        {content}
+      </div>
+    )
+  }
+
+  return (
+    <motion.div
+      className={cardClassName}
+      animate={{ opacity: [opacity, opacity === 1 ? 0.48 : 1, opacity], y: [0, -4, 0] }}
+      transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay }}
+    >
+      {content}
+    </motion.div>
+  )
+}
+
 const CallsScene = ({ isPlaying = false }) => {
   const shouldReduceMotion = useReducedMotion()
   const loopDuration = 12
@@ -370,25 +451,14 @@ const FollowUpScene = ({ isPlaying = false }) => (
         </div>
 
         <div className="grid grid-cols-3 gap-3">
-          {['Quote sent', 'No reply', 'Deal lost'].map((step, index) => (
-            isPlaying ? (
-              <motion.div
-                key={step}
-                className="rounded-2xl border border-white/10 bg-white/[0.03] px-3 py-4 text-center text-xs uppercase tracking-[0.16em] text-white/52"
-                animate={{ opacity: index === 0 ? [1, 0.45, 1] : [0.45, 1, 0.45], y: [0, -4, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: index * 0.25 }}
-              >
-                {step}
-              </motion.div>
-            ) : (
-              <div
-                key={step}
-                className="rounded-2xl border border-white/10 bg-white/[0.03] px-3 py-4 text-center text-xs uppercase tracking-[0.16em] text-white/52"
-                style={{ opacity: index === 0 ? 1 : 0.45 }}
-              >
-                {step}
-              </div>
-            )
+          {followUpStages.map((stage, index) => (
+            <FollowUpStageCard
+              key={stage.label}
+              stage={stage}
+              opacity={index === 0 ? 1 : 0.45}
+              isAnimated={isPlaying}
+              delay={index * 0.25}
+            />
           ))}
         </div>
       </div>
