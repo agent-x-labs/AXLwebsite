@@ -94,19 +94,55 @@ const RevenueChip = ({ x, y, animate, transition }) => (
 
 const followUpStages = [
   {
-    label: 'Quote sent',
-    icon: 'quote-sent',
-    iconClassName: 'border-primary/35 bg-primary/[0.14] text-primary',
+    id: 'quote',
+    cold: {
+      label: 'Quote sent',
+      icon: 'quote-sent',
+      cardClassName: 'border-white/10 bg-white/[0.03]',
+      iconClassName: 'border-white/12 bg-white/[0.04] text-white/68',
+      labelClassName: 'text-white/62',
+    },
+    warm: {
+      label: 'Quote sent',
+      icon: 'quote-sent',
+      cardClassName: 'border-primary/24 bg-primary/[0.06]',
+      iconClassName: 'border-primary/35 bg-primary/[0.14] text-primary',
+      labelClassName: 'text-white/78',
+    },
   },
   {
-    label: 'No reply',
-    icon: 'no-reply',
-    iconClassName: 'border-white/12 bg-white/[0.04] text-white/72',
+    id: 'reply',
+    cold: {
+      label: 'No reply',
+      icon: 'no-reply',
+      cardClassName: 'border-white/10 bg-white/[0.03]',
+      iconClassName: 'border-white/12 bg-white/[0.04] text-white/68',
+      labelClassName: 'text-white/62',
+    },
+    warm: {
+      label: 'Replied',
+      icon: 'replied',
+      cardClassName: 'border-emerald-300/24 bg-emerald-400/[0.07]',
+      iconClassName: 'border-emerald-300/34 bg-emerald-400/[0.14] text-emerald-200/90',
+      labelClassName: 'text-emerald-100/92',
+    },
   },
   {
-    label: 'Deal lost',
-    icon: 'deal-lost',
-    iconClassName: 'border-rose-300/18 bg-rose-300/[0.08] text-rose-200/76',
+    id: 'deal',
+    cold: {
+      label: 'Deal lost',
+      icon: 'deal-lost',
+      cardClassName: 'border-rose-300/18 bg-rose-300/[0.05]',
+      iconClassName: 'border-rose-300/18 bg-rose-300/[0.08] text-rose-200/76',
+      labelClassName: 'text-rose-100/82',
+    },
+    warm: {
+      label: 'Deal won',
+      icon: 'deal-won',
+      cardClassName: 'border-emerald-300/28 bg-emerald-400/[0.09]',
+      iconClassName: 'border-emerald-300/38 bg-emerald-400/[0.16] text-emerald-200/92',
+      labelClassName: 'text-emerald-100/95',
+    },
   },
 ]
 
@@ -117,6 +153,15 @@ const FollowUpStageIcon = ({ icon, className = 'h-3.5 w-3.5' }) => {
         <path d="M4.5 10h6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
         <path d="M8 6.5 11.5 10 8 13.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         <rect x="3.25" y="4.25" width="13.5" height="11.5" rx="3.75" stroke="currentColor" strokeWidth="1.2" opacity="0.8" />
+      </svg>
+    )
+  }
+
+  if (icon === 'replied') {
+    return (
+      <svg viewBox="0 0 20 20" className={className} fill="none" aria-hidden="true">
+        <path d="M15.2 9.7c0 2.9-2.4 5.2-5.2 5.2H7l-2.7 1.6v-1.9a5.2 5.2 0 0 1-2.5-4.5c0-2.9 2.4-5.2 5.2-5.2H10c2.8 0 5.2 2.4 5.2 5.2Z" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round" />
+        <path d="m7.5 10.2 1.7 1.7 3.4-3.6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     )
   }
@@ -132,6 +177,15 @@ const FollowUpStageIcon = ({ icon, className = 'h-3.5 w-3.5' }) => {
     )
   }
 
+  if (icon === 'deal-won') {
+    return (
+      <svg viewBox="0 0 20 20" className={className} fill="none" aria-hidden="true">
+        <circle cx="10" cy="10" r="6.2" stroke="currentColor" strokeWidth="1.2" />
+        <path d="m7 10.3 1.9 1.9 4.1-4.4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    )
+  }
+
   return (
     <svg viewBox="0 0 20 20" className={className} fill="none" aria-hidden="true">
       <circle cx="10" cy="10" r="6.2" stroke="currentColor" strokeWidth="1.2" />
@@ -141,35 +195,40 @@ const FollowUpStageIcon = ({ icon, className = 'h-3.5 w-3.5' }) => {
   )
 }
 
-const FollowUpStageCard = ({ stage, opacity, isAnimated = false, delay = 0 }) => {
-  const cardClassName = "rounded-[22px] border border-white/10 bg-white/[0.03] px-2.5 py-3 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]"
+const FollowUpStageCard = ({ stage, mode = 'cold', enableFlip = false }) => {
+  const stageContent = stage[mode]
+  const cardClassName = `min-h-[94px] rounded-[22px] border px-2.5 py-3 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] transition-colors duration-300 ${stageContent.cardClassName}`
+
   const content = (
     <div className="flex flex-col items-center gap-2">
-      <span className={`flex size-8 items-center justify-center rounded-full border ${stage.iconClassName}`}>
-        <FollowUpStageIcon icon={stage.icon} />
+      <span className={`flex size-8 items-center justify-center rounded-full border transition-colors duration-300 ${stageContent.iconClassName}`}>
+        <FollowUpStageIcon icon={stageContent.icon} />
       </span>
-      <span className="text-[10px] font-semibold uppercase leading-[1.15] tracking-[0.12em] text-white/62">
-        {stage.label}
+      <span className={`text-[10px] font-semibold uppercase leading-[1.15] tracking-[0.12em] transition-colors duration-300 ${stageContent.labelClassName}`}>
+        {stageContent.label}
       </span>
     </div>
   )
 
-  if (!isAnimated) {
-    return (
-      <div className={cardClassName} style={{ opacity }}>
-        {content}
-      </div>
-    )
+  if (!enableFlip) {
+    return <div className={cardClassName}>{content}</div>
   }
 
   return (
-    <motion.div
-      className={cardClassName}
-      animate={{ opacity: [opacity, opacity === 1 ? 0.48 : 1, opacity], y: [0, -4, 0] }}
-      transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay }}
-    >
-      {content}
-    </motion.div>
+    <div className={cardClassName} style={{ perspective: 1000 }}>
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.div
+          key={`${stage.id}-${mode}`}
+          initial={{ opacity: 0, rotateX: -90, scale: 0.97 }}
+          animate={{ opacity: 1, rotateX: 0, scale: 1 }}
+          exit={{ opacity: 0, rotateX: 90, scale: 0.97 }}
+          transition={{ duration: 0.28, ease: [0.32, 0.72, 0, 1] }}
+          className="flex min-h-[68px] items-center justify-center"
+        >
+          {content}
+        </motion.div>
+      </AnimatePresence>
+    </div>
   )
 }
 
@@ -414,15 +473,25 @@ const FollowUpScene = ({ isPlaying = false }) => {
   const primaryWarmthScale = useTransform(warmthLevel, [0, 1], [0.16, 1])
   const secondaryWarmthScale = useTransform(warmthLevel, [0, 1], [0.08, 0.76])
   const [responseLabel, setResponseLabel] = useState('5m')
+  const [statusMode, setStatusMode] = useState('warm')
 
   useMotionValueEvent(responseMinutes, 'change', (latest) => {
     setResponseLabel(formatResponseTime(latest))
+  })
+
+  useMotionValueEvent(warmthLevel, 'change', (latest) => {
+    if (latest >= 0.98) {
+      setStatusMode('warm')
+    } else if (latest <= 0.02) {
+      setStatusMode('cold')
+    }
   })
 
   useEffect(() => {
     if (!isPlaying) {
       warmthLevel.set(1)
       setResponseLabel('5m')
+      setStatusMode('warm')
       return undefined
     }
 
@@ -479,11 +548,10 @@ const FollowUpScene = ({ isPlaying = false }) => {
           <div className="grid grid-cols-3 gap-3">
             {followUpStages.map((stage, index) => (
               <FollowUpStageCard
-                key={stage.label}
+                key={stage.id}
                 stage={stage}
-                opacity={index === 0 ? 1 : 0.45}
-                isAnimated={isPlaying}
-                delay={index * 0.25}
+                mode={statusMode}
+                enableFlip={isPlaying}
               />
             ))}
           </div>
