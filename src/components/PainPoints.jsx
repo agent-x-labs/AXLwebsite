@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import React, { useEffect, useState } from 'react'
+import { AnimatePresence, animate, motion, useMotionValue, useMotionValueEvent, useReducedMotion, useTransform } from "framer-motion";
 
 const painPoints = [
   {
@@ -171,6 +171,14 @@ const FollowUpStageCard = ({ stage, opacity, isAnimated = false, delay = 0 }) =>
       {content}
     </motion.div>
   )
+}
+
+const formatResponseTime = (minutes) => {
+  if (minutes < 60) {
+    return `${Math.max(5, Math.round(minutes))}m`
+  }
+
+  return `${Math.max(1, Math.round(minutes / 60))}hr`
 }
 
 const CallsScene = ({ isPlaying = false }) => {
@@ -400,71 +408,89 @@ const CallsScene = ({ isPlaying = false }) => {
   )
 }
 
-const FollowUpScene = ({ isPlaying = false }) => (
-  <SceneFrame>
-    <div className="grid h-full items-center gap-8 lg:grid-cols-[180px_minmax(0,1fr)]">
-      <div className="relative mx-auto flex h-36 w-36 items-center justify-center rounded-full border border-white/10 bg-white/[0.03]">
-        {isPlaying ? (
-          <motion.div
-            className="absolute inset-3 rounded-full border border-primary/30"
-            animate={{ rotate: 360 }}
-            transition={{ duration: 9, repeat: Infinity, ease: 'linear' }}
-          />
-        ) : (
-          <div className="absolute inset-3 rounded-full border border-primary/30" />
-        )}
-        <div className="text-center">
-          <p className="text-[11px] uppercase tracking-[0.24em] text-white/45">Response</p>
-          <p className="mt-2 text-4xl font-medium tracking-tight text-white" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-            5m
-          </p>
-        </div>
-      </div>
+const FollowUpScene = ({ isPlaying = false }) => {
+  const responseMinutes = useMotionValue(5)
+  const primaryWarmthScale = useTransform(responseMinutes, [5, 1440], [0.92, 0.28])
+  const secondaryWarmthScale = useTransform(responseMinutes, [5, 1440], [0.7, 0.16])
+  const [responseLabel, setResponseLabel] = useState('5m')
 
-      <div className="space-y-4">
-        <div>
-          <p className="text-[11px] uppercase tracking-[0.24em] text-white/40">Lead warmth</p>
-          <div className="mt-3 space-y-3">
-            <div className="h-2 rounded-full bg-white/10">
-              {isPlaying ? (
-                <motion.div
-                  className="h-2 rounded-full bg-primary"
-                  animate={{ width: ['92%', '28%', '92%'] }}
-                  transition={{ duration: 4.3, repeat: Infinity, ease: 'easeInOut' }}
-                />
-              ) : (
-                <div className="h-2 rounded-full bg-primary" style={{ width: '92%' }} />
-              )}
-            </div>
-            <div className="h-2 rounded-full bg-white/10">
-              {isPlaying ? (
-                <motion.div
-                  className="h-2 rounded-full bg-white/60"
-                  animate={{ width: ['70%', '16%', '70%'] }}
-                  transition={{ duration: 4.3, repeat: Infinity, ease: 'easeInOut', delay: 0.3 }}
-                />
-              ) : (
-                <div className="h-2 rounded-full bg-white/60" style={{ width: '70%' }} />
-              )}
-            </div>
+  useMotionValueEvent(responseMinutes, 'change', (latest) => {
+    setResponseLabel(formatResponseTime(latest))
+  })
+
+  useEffect(() => {
+    if (!isPlaying) {
+      responseMinutes.set(5)
+      setResponseLabel('5m')
+      return undefined
+    }
+
+    const controls = animate(responseMinutes, [5, 59, 60, 1440, 60, 59, 5], {
+      duration: 4.8,
+      ease: 'linear',
+      repeat: Infinity,
+      times: [0, 0.22, 0.24, 0.5, 0.76, 0.78, 1],
+    })
+
+    return () => controls.stop()
+  }, [isPlaying, responseMinutes])
+
+  return (
+    <SceneFrame>
+      <div className="grid h-full items-center gap-8 lg:grid-cols-[180px_minmax(0,1fr)]">
+        <div className="relative mx-auto flex h-36 w-36 items-center justify-center rounded-full border border-white/10 bg-white/[0.03]">
+          {isPlaying ? (
+            <motion.div
+              className="absolute inset-3 rounded-full border border-primary/30"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 9, repeat: Infinity, ease: 'linear' }}
+            />
+          ) : (
+            <div className="absolute inset-3 rounded-full border border-primary/30" />
+          )}
+          <div className="text-center">
+            <p className="text-[11px] uppercase tracking-[0.24em] text-white/45">Response</p>
+            <p className="mt-2 text-4xl font-medium tracking-tight text-white" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+              {responseLabel}
+            </p>
           </div>
         </div>
 
-        <div className="grid grid-cols-3 gap-3">
-          {followUpStages.map((stage, index) => (
-            <FollowUpStageCard
-              key={stage.label}
-              stage={stage}
-              opacity={index === 0 ? 1 : 0.45}
-              isAnimated={isPlaying}
-              delay={index * 0.25}
-            />
-          ))}
+        <div className="space-y-4">
+          <div>
+            <p className="text-[11px] uppercase tracking-[0.24em] text-white/40">Lead warmth</p>
+            <div className="mt-3 space-y-3">
+              <div className="h-2 rounded-full bg-white/10">
+                <motion.div
+                  className="h-2 origin-left rounded-full bg-primary"
+                  style={{ scaleX: primaryWarmthScale }}
+                />
+              </div>
+              <div className="h-2 rounded-full bg-white/10">
+                <motion.div
+                  className="h-2 origin-left rounded-full bg-white/60"
+                  style={{ scaleX: secondaryWarmthScale }}
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-3 gap-3">
+            {followUpStages.map((stage, index) => (
+              <FollowUpStageCard
+                key={stage.label}
+                stage={stage}
+                opacity={index === 0 ? 1 : 0.45}
+                isAnimated={isPlaying}
+                delay={index * 0.25}
+              />
+            ))}
+          </div>
         </div>
       </div>
-    </div>
-  </SceneFrame>
-)
+    </SceneFrame>
+  )
+}
 
 const ContentScene = ({ isPlaying = false }) => (
   <SceneFrame>
