@@ -31,7 +31,7 @@ const Hero = () => {
       transition={{ duration: 0.5, delay:1 }}
       viewport={{once: true}}
 
-      className='text-sm sm:text-lg font-medium text-gray-500 dark:text-white/75 max-w-4/5 sm:max-w-lg pb-3'>Bespoke AI agents that create & manage content, leads, calls, follow-ups, and reviews - so you focus on the work that moves the needle, not the busywork.</motion.p>
+      className='text-sm sm:text-lg font-medium text-gray-500 dark:text-white/75 max-w-4/5 sm:max-w-lg pb-3'>Bespoke AI agents that create & manage content, leads, calls, follow-ups, and reviews - so you focus on the work that moves the needle, not the admin.</motion.p>
 
       <motion.div
       initial={{ opacity: 0, y: 20 }}

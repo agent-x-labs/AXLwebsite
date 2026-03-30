@@ -39,7 +39,7 @@ const OurWork = () => {
     >
       <Title
         title="How it works"
-        desc="Up and running in 5 days. Not 5 months. No technical knowledge required."
+        desc="Up and running in 5 days. No technical knowledge required."
       />
 
       <motion.div
