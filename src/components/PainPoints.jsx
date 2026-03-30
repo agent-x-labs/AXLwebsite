@@ -711,7 +711,7 @@ const PainPoints = () => {
               You're probably losing more business than you realise.
             </h2>
             <p className='max-w-lg text-base leading-relaxed text-gray-500 dark:text-white/75'>
-              Most small businesses do not have a fulfillment problem. They have a visibility and follow-up problem.
+              Most SME businesses do not have a fulfillment problem. They have a visibility and follow-up problem.
             </p>
           </motion.div>
 
