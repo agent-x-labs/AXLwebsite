@@ -98,9 +98,9 @@ const followUpStages = [
     cold: {
       label: 'Quote sent',
       icon: 'quote-sent',
-      cardClassName: 'border-white/10 bg-white/[0.03]',
-      iconClassName: 'border-white/12 bg-white/[0.04] text-white/68',
-      labelClassName: 'text-white/62',
+      cardClassName: 'border-primary/24 bg-primary/[0.06]',
+      iconClassName: 'border-primary/35 bg-primary/[0.14] text-primary',
+      labelClassName: 'text-white/78',
     },
     warm: {
       label: 'Quote sent',
@@ -197,20 +197,21 @@ const FollowUpStageIcon = ({ icon, className = 'h-3.5 w-3.5' }) => {
 
 const FollowUpStageCard = ({ stage, mode = 'cold', enableFlip = false }) => {
   const stageContent = stage[mode]
+  const shouldFlip = enableFlip && stage.id !== 'quote'
   const cardClassName = `min-h-[94px] rounded-[22px] border px-2.5 py-3 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] transition-colors duration-300 ${stageContent.cardClassName}`
 
   const content = (
-    <div className="flex flex-col items-center gap-2">
+    <div className="grid min-h-[68px] grid-rows-[32px_auto] place-items-center content-start gap-2">
       <span className={`flex size-8 items-center justify-center rounded-full border transition-colors duration-300 ${stageContent.iconClassName}`}>
         <FollowUpStageIcon icon={stageContent.icon} />
       </span>
-      <span className={`text-[10px] font-semibold uppercase leading-[1.15] tracking-[0.12em] transition-colors duration-300 ${stageContent.labelClassName}`}>
+      <span className={`text-center text-[10px] font-semibold uppercase leading-[1.15] tracking-[0.12em] transition-colors duration-300 ${stageContent.labelClassName}`}>
         {stageContent.label}
       </span>
     </div>
   )
 
-  if (!enableFlip) {
+  if (!shouldFlip) {
     return <div className={cardClassName}>{content}</div>
   }
 

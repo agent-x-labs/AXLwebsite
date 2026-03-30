@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 const founderLetterParagraphs = [
   "We spent years helping the biggest companies in the world get ahead - and it started to bother us.",
-  "Between us, we've sat inside McKinsey boardrooms and private equity deal rooms, helping FTSE 100 giants and Fortune 500 companies transform their operations through AI and technology. And the uncomfortable truth we kept coming back to? The businesses that needed this the most could never afford to walk through those doors.",
+  "Between us, we've sat inside McKinsey boardrooms and Morgan Stanley deal rooms, helping FTSE 100 giants and Fortune 500 companies transform their strategy and operations through AI and technology. And the uncomfortable truth we kept coming back to? The businesses that needed this the most could never afford to walk through those doors.",
   "Small and medium businesses are the backbone of the UK economy - responsible for nearly 60% of the workforce - yet they're buried under admin and manual processes that the corporates automated years ago. Every ambitious owner, operator, and director deserves access to the same tools, not just those writing six-figure consulting cheques.",
   "So we left. We founded AXL to bring that same calibre of AI, automation, and workflow intelligence directly to the service businesses, professional firms, and tradespeople actually powering this country. Our job is simple: take the busywork off your plate so you can get back to what you're actually brilliant at - running and growing your business.",
 ];
@@ -81,7 +81,7 @@ const Teams = () => {
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-10">
         <Title
           title="Meet the team"
-          desc="Why we left boardrooms and consulting rooms to bring better systems to the businesses actually powering this country."
+          desc="Why we left boardrooms to bring better systems to the businesses actually powering this country."
         />
 
         <div className="grid w-full gap-5 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:items-stretch xl:gap-6">
