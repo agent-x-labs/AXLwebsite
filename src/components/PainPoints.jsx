@@ -599,7 +599,7 @@ const PainPoints = () => {
           </div>
         </div>
 
-        <div className="order-last lg:sticky lg:top-24">
+        <div className="order-last hidden lg:block lg:sticky lg:top-24">
           <AnimatePresence mode="wait" initial={false}>
             {activePoint ? (
               <motion.aside

@@ -24,12 +24,19 @@ const App = () => {
   const position = useRef({x: 0, y: 0})
 
   useEffect(() => {
+    const canUseCustomCursor = window.matchMedia('(min-width: 1024px) and (pointer: fine)').matches
+
+    if (!canUseCustomCursor) {
+      return
+    }
+
     const handelMouseMove = (e) => {
       mouse.current.x = e.clientX
       mouse.current.y = e.clientY
     }
 
     document.addEventListener('mousemove', handelMouseMove)
+    let frameId
 
     const animate = () => {
       position.current.x += (mouse.current.x - position.current.x) * 0.1
@@ -39,12 +46,13 @@ const App = () => {
         dotRef.current.style.transform = `translate3D(${mouse.current.x -6}px, ${mouse.current.y -6}px, 0)`
         outlineRef.current.style.transform = `translate3D(${position.current.x -20}px, ${position.current.y -20}px, 0)`
       }
-      requestAnimationFrame(animate)
+      frameId = requestAnimationFrame(animate)
     }
     animate()
 
     return() => {
       document.removeEventListener('mousemove', handelMouseMove)
+      cancelAnimationFrame(frameId)
     }
   },[])
 
@@ -61,11 +69,11 @@ const App = () => {
       <Footer theme={theme} />
 
       {/* Custom Cursor Ring */}
-      <div ref={outlineRef} className="fixed top-0 left-0 h-10 w-10 rounded-full border border-primary pointer-events-none z-[9999" 
+      <div ref={outlineRef} className="fixed top-0 left-0 hidden h-10 w-10 rounded-full border border-primary pointer-events-none z-[9999] lg:block" 
       style={{transition: 'transform 0.1s ease-out'}}>
       </div>
       {/* Custom Cursor Dot */}
-      <div ref={dotRef}  className="fixed top-0 left-0 h-3 w-3 rounded-full bg-primary pointer-events-none z-[9999]"></div>
+      <div ref={dotRef}  className="fixed top-0 left-0 hidden h-3 w-3 rounded-full bg-primary pointer-events-none z-[9999] lg:block"></div>
     </div>
   )
 }

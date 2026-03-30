@@ -47,7 +47,7 @@ const ContactUs = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45, delay: 0.26 }}
             viewport={{ once: true }}
-            className="mt-8 rounded-full bg-primary px-8 py-3.5 text-sm font-medium text-white transition-transform hover:scale-105"
+            className="mt-8 whitespace-nowrap rounded-full bg-primary px-6 py-3.5 text-sm font-medium text-white transition-transform hover:scale-105 sm:px-8"
           >
             Free Strategy Call
           </motion.button>

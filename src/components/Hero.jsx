@@ -14,7 +14,7 @@ const Hero = () => {
       viewport={{once: true}}
       
       className="inline-flex items-center rounded-full border border-gray-300/80 px-4 py-2 text-center dark:border-white/15">
-        <p className='text-xs font-medium sm:text-sm'>For service businesses, tradespeople, and professional firms</p>
+        <p className='text-xs font-medium sm:text-sm'>For service businesses and tradespeople</p>
       </motion.div>
 
       <motion.h1
@@ -39,10 +39,10 @@ const Hero = () => {
       transition={{ duration: 0.5, delay: 1.2 }}
       viewport={{once: true}}
       className="flex flex-col sm:flex-row items-center gap-4">
-        <a href="#contact-us" className="bg-primary text-white px-8 py-3 rounded-full font-medium hover:scale-105 transition-transform">
+        <a href="#contact-us" className="whitespace-nowrap bg-primary text-white px-6 py-3 rounded-full font-medium hover:scale-105 transition-transform sm:px-8">
           Free Strategy Call
         </a>
-        <a href="#services" className="border border-gray-500 dark:border-white/30 text-gray-700 dark:text-white px-8 py-3 rounded-full font-medium hover:scale-105 transition-transform">
+        <a href="#services" className="whitespace-nowrap border border-gray-500 dark:border-white/30 text-gray-700 dark:text-white px-6 py-3 rounded-full font-medium hover:scale-105 transition-transform sm:px-8">
           See how it works ↓
         </a>
       </motion.div>

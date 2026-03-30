@@ -47,7 +47,7 @@ const Footer = ({ theme }) => {
               placeholder="Enter your email"
               className="w-full p-3 text-sm outline-none rounded dark:text-gray-200 bg-transparent border border-gray-300 dark:border-gray-500"
             />
-            <button className="bg-primary text-white rounded px-6">
+            <button className="whitespace-nowrap bg-primary text-white rounded px-6">
               Susbcribe
             </button>
           </div>

@@ -120,7 +120,7 @@ const OurWork = () => {
           </div>
 
           <div className="mt-2 p-3 sm:mt-3 sm:p-4">
-            <div className="grid gap-3 md:grid-cols-3">
+            <div className="grid gap-3 lg:grid-cols-3">
               {stepsData.map((item, index) => {
                 const isActive = index === activeIndex;
 
@@ -132,7 +132,7 @@ const OurWork = () => {
                     onMouseEnter={() => setActiveIndex(index)}
                     onFocus={() => setActiveIndex(index)}
                     onClick={() => setActiveIndex(index)}
-                    className={`h-full rounded-[22px] border p-5 text-left outline-none transition-all duration-300 sm:p-6 ${
+                    className={`${isActive ? "block" : "hidden"} h-full rounded-[22px] border p-5 text-left outline-none transition-all duration-300 sm:p-6 lg:block ${
                       isActive
                         ? "border-primary/55 bg-primary/[0.08] shadow-[0_0_0_1px_rgba(142,45,226,0.22),0_18px_40px_rgba(142,45,226,0.12)]"
                         : "border-white/10 bg-white/[0.02] hover:border-white/18 hover:bg-white/[0.03]"

@@ -7,9 +7,35 @@
 *{
   font-family: "Manrope", sans-serif;
   font-weight: 500;
-  cursor: none;
 }
 
 @theme {
   --color-primary: #8E2DE2;
+}
+
+@media (min-width: 1024px) and (pointer: fine) {
+  * {
+    cursor: none;
+  }
+}
+
+@keyframes trusted-logo-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.trusted-logo-marquee {
+  width: max-content;
+  animation: trusted-logo-marquee 24s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trusted-logo-marquee {
+    animation: none;
+  }
 }
