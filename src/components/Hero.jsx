@@ -38,11 +38,11 @@ const Hero = () => {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 1.2 }}
       viewport={{once: true}}
-      className="flex flex-col sm:flex-row items-center gap-4">
-        <a href="#contact-us" className="whitespace-nowrap bg-primary text-white px-6 py-3 rounded-full font-medium hover:scale-105 transition-transform sm:px-8">
+      className="flex flex-row flex-nowrap items-center justify-center gap-3 sm:gap-4">
+        <a href="#contact-us" className="whitespace-nowrap bg-primary text-white px-4 py-3 text-sm rounded-full font-medium hover:scale-105 transition-transform sm:px-8 sm:text-base">
           Free Strategy Call
         </a>
-        <a href="#services" className="whitespace-nowrap border border-gray-500 dark:border-white/30 text-gray-700 dark:text-white px-6 py-3 rounded-full font-medium hover:scale-105 transition-transform sm:px-8">
+        <a href="#services" className="whitespace-nowrap border border-gray-500 dark:border-white/30 text-gray-700 dark:text-white px-4 py-3 text-sm rounded-full font-medium hover:scale-105 transition-transform sm:px-8 sm:text-base">
           See how it works ↓
         </a>
       </motion.div>

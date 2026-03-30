@@ -13,7 +13,7 @@ const LogoItems = ({ ariaHidden = false }) => (
         <img
           src={logo.src}
           alt={ariaHidden ? "" : logo.alt}
-          className={`${logo.className} h-auto object-contain dark:drop-shadow-xl`}
+          className={`${logo.className} h-auto object-contain`}
         />
       </div>
     ))}
@@ -56,17 +56,14 @@ const TrustedBy = ({ className = '' }) => {
               <img
                 src={logo.src}
                 alt={logo.alt}
-                className={`${logo.className} h-auto object-contain dark:drop-shadow-xl`}
+                className={`${logo.className} h-auto object-contain`}
               />
             </motion.div>
           ))}
         </motion.div>
       </div>
 
-      <div className="relative w-full overflow-hidden lg:hidden">
-        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-10 bg-gradient-to-r from-white to-transparent dark:from-black" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-10 bg-gradient-to-l from-white to-transparent dark:from-black" />
-
+      <div className="w-full overflow-hidden lg:hidden">
         <div className="trusted-logo-marquee flex min-w-max items-center">
           <LogoItems />
           <LogoItems ariaHidden />
