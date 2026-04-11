@@ -17,28 +17,36 @@ const Footer = ({ theme }) => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
         viewport={{ once: true }}
-        className="space-y-5 text-sm text-gray-700 dark:text-gray-400"
+        className="flex flex-col gap-8 text-sm text-gray-700 dark:text-gray-400 lg:flex-row lg:items-start lg:justify-between"
       >
-        <a href="/" aria-label="Agent X Labs home">
-          <img
-            src={assets.logo}
-            alt="Agent X Labs"
-            width="632"
-            height="111"
-            loading="lazy"
-            decoding="async"
-            className={`w-32 sm:w-44 ${theme === "dark" ? "brightness-[2]" : ""}`}
-          />
-        </a>
-        <p className="max-w-md">
-          Turn missed calls, dead leads, and silent customers into revenue - on autopilot.
-        </p>
-        <div className="flex flex-wrap gap-3 text-sm">
-          {servicePages.map((service) => (
-            <a key={service.slug} href={service.path} className="transition-colors hover:text-primary">
-              {service.title}
-            </a>
-          ))}
+        <div className="space-y-5">
+          <a href="/" aria-label="Agent X Labs home">
+            <img
+              src={assets.logo}
+              alt="Agent X Labs"
+              width="632"
+              height="111"
+              loading="lazy"
+              decoding="async"
+              className={`w-32 sm:w-44 ${theme === "dark" ? "brightness-[2]" : ""}`}
+            />
+          </a>
+          <p className="max-w-md">
+            Turn missed calls, dead leads, and silent customers into revenue - on autopilot.
+          </p>
+        </div>
+
+        <div className="flex flex-col gap-3 lg:items-end">
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-gray-500 dark:text-white/42">
+            Services
+          </p>
+          <div className="flex flex-col gap-2 lg:items-end">
+            {servicePages.map((service) => (
+              <a key={service.slug} href={service.path} className="transition-colors hover:text-primary">
+                {service.title}
+              </a>
+            ))}
+          </div>
         </div>
       </motion.div>
       <div className="my-6 h-px w-full bg-gray-300 dark:bg-gray-600" />

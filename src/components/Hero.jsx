@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import { WaveOne } from "./ui/wave-1";
 import TrustedBy from "./TrustedBy";
 import { STRATEGY_CALL_URL } from '../lib/links'
-import { servicePages } from '../content/servicePages'
 
 const Hero = () => {
   return (
@@ -16,7 +15,7 @@ const Hero = () => {
       viewport={{once: true}}
       
       className="inline-flex items-center rounded-full border border-gray-300/80 px-4 py-2 text-center dark:border-white/15">
-        <p className='text-xs font-medium sm:text-sm'>AI automation for UK service businesses</p>
+        <p className='text-xs font-medium sm:text-sm'>For service businesses and tradespeople</p>
       </motion.div>
 
       <motion.h1
@@ -25,7 +24,7 @@ const Hero = () => {
       transition={{ duration: 0.6, delay:0.8 }}
       viewport={{once: true}}
 
-      className='text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-medium xl:leading-[75px] max-w-5xl' style={{ fontFamily: "'Space Grotesk', sans-serif" }}>AI agents for UK service businesses that answer calls, follow up leads, win reviews, and keep your pipeline moving.</motion.h1>
+      className='text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-medium xl:leading-[75px] max-w-5xl' style={{ fontFamily: "'Space Grotesk', sans-serif" }}>Turn missed calls, dead leads, and silent customers into revenue - on <span className='bg-gradient-to-r from-[#00BF8F] to-[#8E2DE2] bg-clip-text text-transparent'>autopilot.</span></motion.h1>
 
       <motion.p 
       initial={{ opacity: 0, y: 30 }}
@@ -33,7 +32,7 @@ const Hero = () => {
       transition={{ duration: 0.5, delay:1 }}
       viewport={{once: true}}
 
-      className='text-sm sm:text-lg font-medium text-gray-500 dark:text-white/75 max-w-4/5 sm:max-w-3xl pb-3'>Agent X Labs builds AI agents for reception, lead follow-up, review generation, and content marketing so your team can focus on billable work instead of repetitive admin.</motion.p>
+      className='text-sm sm:text-lg font-medium text-gray-500 dark:text-white/75 max-w-4/5 sm:max-w-lg pb-3'>Bespoke AI agents that create &amp; manage content, leads, calls, follow-ups, and reviews - so you focus on the work that moves the needle, not the admin.</motion.p>
 
       <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -48,18 +47,6 @@ const Hero = () => {
           See how it works ↓
         </a>
       </motion.div>
-
-      <div className="flex flex-wrap items-center justify-center gap-2">
-        {servicePages.map((service) => (
-          <a
-            key={service.slug}
-            href={`#${service.slug}`}
-            className="rounded-full border border-gray-300/80 px-3 py-1.5 text-xs font-medium text-gray-600 transition-colors hover:border-primary hover:text-primary dark:border-white/12 dark:text-white/68 dark:hover:border-primary dark:hover:text-white"
-          >
-            {service.title}
-          </a>
-        ))}
-      </div>
 
       <TrustedBy className="mt-2.5" />
 
