@@ -2,6 +2,7 @@ import React from 'react'
 import { motion } from "framer-motion";
 import { WaveOne } from "./ui/wave-1";
 import TrustedBy from "./TrustedBy";
+import { STRATEGY_CALL_URL } from '../lib/links'
 
 const Hero = () => {
   return (
@@ -39,7 +40,7 @@ const Hero = () => {
       transition={{ duration: 0.5, delay: 1.2 }}
       viewport={{once: true}}
       className="flex flex-row flex-nowrap items-center justify-center gap-3 sm:gap-4">
-        <a href="#contact-us" className="whitespace-nowrap bg-primary text-white px-4 py-3 text-sm rounded-full font-medium hover:scale-105 transition-transform sm:px-8 sm:text-base">
+        <a href={STRATEGY_CALL_URL} className="whitespace-nowrap bg-primary text-white px-4 py-3 text-sm rounded-full font-medium hover:scale-105 transition-transform sm:px-8 sm:text-base">
           Free Strategy Call
         </a>
         <a href="#services" className="whitespace-nowrap border border-gray-500 dark:border-white/30 text-gray-700 dark:text-white px-4 py-3 text-sm rounded-full font-medium hover:scale-105 transition-transform sm:px-8 sm:text-base">

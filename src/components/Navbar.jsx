@@ -1,6 +1,7 @@
 import React from "react";
 import assets from "../assets/assets";
 import { motion } from "framer-motion";
+import { STRATEGY_CALL_URL } from "../lib/links";
 
 const Navbar = ({ theme }) => {
   return (
@@ -18,7 +19,7 @@ const Navbar = ({ theme }) => {
       />
       <div className="flex justify-end lg:justify-self-end">
         <a
-          href="#contact-us"
+          href={STRATEGY_CALL_URL}
           className="inline-flex shrink-0 items-center whitespace-nowrap rounded-full bg-primary px-4 py-2.5 text-[13px] font-medium text-white transition-transform hover:scale-105 sm:px-5 sm:py-3 sm:text-sm md:px-5 md:text-sm"
         >
           Free Strategy Call

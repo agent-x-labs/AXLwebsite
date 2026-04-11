@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { STRATEGY_CALL_URL } from "../lib/links";
 
 const ContactUs = () => {
   return (
@@ -41,16 +42,16 @@ const ContactUs = () => {
             Book a free 30-minute revenue check. We&apos;ll show you exactly where you&apos;re losing business and give you 3 specific recommendations - whether you hire us or not.
           </motion.p>
 
-          <motion.button
-            type="button"
+          <motion.a
+            href={STRATEGY_CALL_URL}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45, delay: 0.26 }}
             viewport={{ once: true }}
-            className="mt-8 whitespace-nowrap rounded-full bg-primary px-6 py-3.5 text-sm font-medium text-white transition-transform hover:scale-105 sm:px-8"
+            className="mt-8 inline-flex whitespace-nowrap rounded-full bg-primary px-6 py-3.5 text-sm font-medium text-white transition-transform hover:scale-105 sm:px-8"
           >
             Free Strategy Call
-          </motion.button>
+          </motion.a>
 
           <motion.p
             initial={{ opacity: 0, y: 18 }}
