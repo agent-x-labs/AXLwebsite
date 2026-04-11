@@ -1,5 +1,6 @@
 import React from 'react'
 import assets from '../assets/assets'
+import CustomCursor from '../components/CustomCursor'
 
 export const LegalSection = ({ title, children }) => (
   <section className="rounded-[28px] border border-white/10 bg-white/[0.03] p-6 sm:p-8">
@@ -16,6 +17,7 @@ export const LegalSection = ({ title, children }) => (
 const LegalLayout = ({ eyebrow, title, intro, lastUpdated, children }) => {
   return (
     <div className="min-h-screen bg-black text-white">
+      <CustomCursor />
       <div className="pointer-events-none fixed inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,_rgba(142,45,226,0.16),_transparent_26%),radial-gradient(circle_at_bottom_right,_rgba(0,191,143,0.08),_transparent_26%)]" />
 
       <header className="px-4 py-5 sm:px-8 lg:px-16 xl:px-24">
