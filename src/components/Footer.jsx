@@ -1,6 +1,7 @@
 import React from "react";
 import assets from "../assets/assets";
 import { motion } from "framer-motion";
+import { servicePages } from "../content/servicePages";
 
 const Footer = ({ theme }) => {
   return (
@@ -18,14 +19,27 @@ const Footer = ({ theme }) => {
         viewport={{ once: true }}
         className="space-y-5 text-sm text-gray-700 dark:text-gray-400"
       >
-        <img
-          src={assets.logo}
-          alt="Agent X Labs"
-          className={`w-32 sm:w-44 ${theme === "dark" ? "brightness-[2]" : ""}`}
-        />
+        <a href="/" aria-label="Agent X Labs home">
+          <img
+            src={assets.logo}
+            alt="Agent X Labs"
+            width="632"
+            height="111"
+            loading="lazy"
+            decoding="async"
+            className={`w-32 sm:w-44 ${theme === "dark" ? "brightness-[2]" : ""}`}
+          />
+        </a>
         <p className="max-w-md">
           Turn missed calls, dead leads, and silent customers into revenue - on autopilot.
         </p>
+        <div className="flex flex-wrap gap-3 text-sm">
+          {servicePages.map((service) => (
+            <a key={service.slug} href={service.path} className="transition-colors hover:text-primary">
+              {service.title}
+            </a>
+          ))}
+        </div>
       </motion.div>
       <div className="my-6 h-px w-full bg-gray-300 dark:bg-gray-600" />
 

@@ -13,6 +13,8 @@ const LogoItems = ({ ariaHidden = false }) => (
         <img
           src={logo.src}
           alt={ariaHidden ? "" : logo.alt}
+          loading="lazy"
+          decoding="async"
           className={`${logo.className} h-auto object-contain`}
         />
       </div>
@@ -56,6 +58,8 @@ const TrustedBy = ({ className = '' }) => {
               <img
                 src={logo.src}
                 alt={logo.alt}
+                loading="lazy"
+                decoding="async"
                 className={`${logo.className} h-auto object-contain`}
               />
             </motion.div>

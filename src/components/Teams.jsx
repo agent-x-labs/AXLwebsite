@@ -76,6 +76,7 @@ const Teams = () => {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
+      id="team"
       className="px-4 pt-30 text-gray-800 dark:text-white sm:px-12 lg:px-24 xl:px-40"
     >
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-10">
@@ -95,6 +96,10 @@ const Teams = () => {
             <motion.img
               src={assets.foundersAleksTengo}
               alt="AXL founders Tengo and Alex"
+              width="934"
+              height="1291"
+              loading="lazy"
+              decoding="async"
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.08 }}

@@ -1,15 +1,17 @@
 import React from 'react'
 import { motion } from "framer-motion";
 
-const Title = ({title, desc}) => {
+const Title = ({ title, desc, as: HeadingTag = 'h2' }) => {
   return (
     <>
-      <motion.h1
+      <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6}}
       viewport={{once: true}}
-      className='text-3xl sm:text-5xl text-center mb-3 font-medium'>{title}</motion.h1>
+      >
+        <HeadingTag className='text-3xl sm:text-5xl text-center mb-3 font-medium'>{title}</HeadingTag>
+      </motion.div>
       <motion.p
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}

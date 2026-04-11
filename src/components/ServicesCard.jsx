@@ -12,11 +12,12 @@ const ServicesCard = ({ service, index }) => {
   }
 
   return (
-    <motion.div
+    <motion.article
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.14 }}
       viewport={{ once: true }}
+      id={service.slug}
       className="relative h-full overflow-hidden rounded-[30px] border border-gray-200/80 bg-white/[0.95] shadow-[0_22px_80px_rgba(15,23,42,0.08)] dark:border-white/10 dark:bg-[#080808] dark:shadow-[0_28px_80px_rgba(0,0,0,0.36)]"
       onMouseEnter={() => setVisible(true)}
       onMouseLeave={() => setVisible(false)}
@@ -34,6 +35,10 @@ const ServicesCard = ({ service, index }) => {
             <img
               src={service.icon}
               alt=""
+              width="72"
+              height="72"
+              loading="lazy"
+              decoding="async"
               className="size-9 object-contain"
               aria-hidden="true"
             />
@@ -67,8 +72,17 @@ const ServicesCard = ({ service, index }) => {
             </li>
           ))}
         </ul>
+
+        <div className="pt-2">
+          <a
+            href={service.path}
+            className="inline-flex items-center text-sm font-medium text-primary transition-colors hover:text-primary/80"
+          >
+            Learn more about {service.title.toLowerCase()} →
+          </a>
+        </div>
       </div>
-    </motion.div>
+    </motion.article>
   );
 };
 

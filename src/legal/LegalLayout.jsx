@@ -23,7 +23,15 @@ const LegalLayout = ({ eyebrow, title, intro, lastUpdated, children }) => {
       <header className="px-4 py-5 sm:px-8 lg:px-16 xl:px-24">
         <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 rounded-full border border-white/10 bg-white/[0.03] px-4 py-3 backdrop-blur-xl sm:px-6">
           <a href="/" className="inline-flex items-center gap-3 text-white">
-            <img src={assets.logo} alt="Agent X Labs" className="w-28 brightness-[2] sm:w-32" />
+            <img
+              src={assets.logo}
+              alt="Agent X Labs"
+              width="632"
+              height="111"
+              loading="eager"
+              decoding="async"
+              className="w-28 brightness-[2] sm:w-32"
+            />
           </a>
           <a
             href="/"
