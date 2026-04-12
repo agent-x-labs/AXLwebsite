@@ -1,4 +1,18 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "outputDirectory": "dist"
+  "outputDirectory": "dist",
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "header",
+          "key": "host",
+          "value": "www.agentxlabs.com"
+        }
+      ],
+      "destination": "https://agentxlabs.com/:path*",
+      "permanent": true
+    }
+  ]
 }
