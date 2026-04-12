@@ -91,7 +91,7 @@ const Teams = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55 }}
             viewport={{ once: true }}
-            className="relative flex min-h-[380px] items-end justify-start sm:min-h-[500px] lg:min-h-[560px]"
+            className="relative flex min-h-[380px] items-end justify-center sm:min-h-[500px] lg:min-h-[560px] lg:justify-start"
           >
             <motion.img
               src={assets.foundersAleksTengo}
@@ -104,7 +104,7 @@ const Teams = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.08 }}
               viewport={{ once: true }}
-              className="relative z-10 mt-2 ml-[-1rem] h-[390px] w-auto max-w-none object-contain sm:ml-[-1.75rem] sm:h-[520px] lg:ml-[-3.5rem] lg:h-[620px] xl:ml-[-4rem] xl:h-[660px]"
+              className="relative z-10 mt-2 h-[390px] w-auto max-w-none object-contain sm:h-[520px] lg:ml-[-3.5rem] lg:h-[620px] xl:ml-[-4rem] xl:h-[660px]"
             />
           </motion.div>
 
