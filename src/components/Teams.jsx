@@ -85,7 +85,7 @@ const Teams = () => {
           desc="Why we left boardrooms to bring better systems to the businesses actually powering this country."
         />
 
-        <div className="grid w-full gap-5 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:items-stretch xl:gap-6">
+        <div className="grid w-full gap-0 sm:gap-4 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:items-stretch lg:gap-5 xl:gap-6">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
