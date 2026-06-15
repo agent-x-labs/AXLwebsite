@@ -21,8 +21,8 @@ export const HERO = {
   /** the word(s) wrapped in <gradient> render with the brand gradient fill */
   headlineLead: "We build the AI agents that ",
   headlineGradient: "run your business",
-  headlineTail: " while you do the work that matters.",
-  sub: "Custom-built agents that answer your calls, revive dead leads, win reviews, and create your content — enterprise-grade AI, built for how your business actually works.",
+  headlineTail: ".",
+  sub: "Custom-built agents that answer your calls, revive dead leads, win reviews, and create your content.",
 } as const;
 
 export const SHIFT = {
