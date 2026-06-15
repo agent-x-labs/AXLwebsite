@@ -10,8 +10,9 @@ export function SiteNav() {
     <header id="top">
       <nav className="site-nav" aria-label="Main navigation">
         <div className="nav-inner">
-          <a className="nav-logo" href="#top">
-            Agent <span className="x">X</span> Labs
+          <a className="nav-logo" href="#top" aria-label="Agent X Labs — home">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/brand/logo_axl.png" alt="Agent X Labs" />
           </a>
           <div className="nav-right">
             <div className="nav-links">

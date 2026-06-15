@@ -31,16 +31,23 @@ export const SHIFT = {
   body: "Answering, chasing, following up, posting — the jobs that quietly decide whether you grow. The businesses that automate them first won't just save time. They'll take the customers everyone else is too slow to answer.",
 } as const;
 
-export const PEDIGREE = {
+export interface PedigreeLogo {
+  src: string;
+  alt: string;
+  /** false = render in natural color (skip the ink-tint filter) */
+  tint?: boolean;
+}
+
+export const PEDIGREE: { label: string; logos: PedigreeLogo[] } = {
   label: "Built by operators who've delivered at",
   logos: [
     { src: "/logos/morgan-stanley.svg", alt: "Morgan Stanley" },
     { src: "/logos/mckinsey.svg", alt: "McKinsey & Company" },
-    { src: "/logos/jp-morgan.svg", alt: "JP Morgan" },
+    { src: "/logos/william-blair.svg", alt: "William Blair" },
     { src: "/logos/cambridge.svg", alt: "University of Cambridge" },
-    { src: "/logos/bank-of-georgia.svg", alt: "Bank of Georgia" },
+    { src: "/logos/bank-of-georgia.svg", alt: "Bank of Georgia", tint: false },
   ],
-} as const;
+};
 
 export interface Step {
   num: string;

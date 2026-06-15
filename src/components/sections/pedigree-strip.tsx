@@ -8,7 +8,12 @@ export function PedigreeStrip() {
         <div className="pedigree-row">
           {PEDIGREE.logos.map((logo) => (
             // eslint-disable-next-line @next/next/no-img-element
-            <img key={logo.src} className="pedigree-logo" src={logo.src} alt={logo.alt} />
+            <img
+              key={logo.src}
+              className={logo.tint === false ? "pedigree-logo pedigree-logo--natural" : "pedigree-logo"}
+              src={logo.src}
+              alt={logo.alt}
+            />
           ))}
         </div>
       </div>

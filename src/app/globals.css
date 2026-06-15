@@ -300,16 +300,15 @@ em {
 }
 .nav-logo {
   display: inline-flex;
-  align-items: baseline;
-  gap: 9px;
-  font-family: var(--display);
-  font-weight: 600;
-  font-size: 19px;
-  letter-spacing: -0.02em;
-  color: var(--ink);
+  align-items: center;
 }
-.nav-logo .x {
-  color: var(--violet);
+.nav-logo img {
+  height: 28px;
+  width: auto;
+  display: block;
+}
+.site-footer .nav-logo img {
+  height: 24px;
 }
 .nav-right {
   display: flex;
@@ -459,6 +458,11 @@ em {
 }
 .pedigree-logo:hover {
   opacity: 0.8;
+}
+/* logos that flatten to a solid box under the ink filter render in natural color */
+.pedigree-logo--natural {
+  filter: none;
+  opacity: 0.9;
 }
 
 /* ── Agents ───────────────────────────────────────────── */
