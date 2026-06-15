@@ -1,5 +1,4 @@
 import { HERO, SITE } from "@/content/site";
-import { HyperVideo } from "@/components/hyper-video";
 
 export function HeroSection() {
   return (
@@ -19,9 +18,6 @@ export function HeroSection() {
           <a className="btn btn-secondary" href="#agents">
             See what we build →
           </a>
-        </div>
-        <div style={{ marginTop: "clamp(48px, 6vw, 84px)" }}>
-          <HyperVideo label="Agents at work" src="/agents/hero" />
         </div>
       </div>
     </section>

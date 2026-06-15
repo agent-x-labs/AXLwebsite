@@ -594,37 +594,6 @@ em {
   color: var(--ink-muted);
 }
 
-/* ── Founders ─────────────────────────────────────────── */
-.founders-grid {
-  margin-top: clamp(32px, 4vw, 48px);
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: clamp(32px, 5vw, 64px);
-  align-items: center;
-}
-.founders-body p {
-  font-size: clamp(1.05rem, 0.9rem + 0.5vw, 1.25rem);
-  line-height: 1.55;
-  color: var(--ink-soft);
-}
-.founders-body p + p {
-  margin-top: 20px;
-}
-.founders-signoff {
-  margin-top: 26px;
-  font-family: var(--display);
-  font-weight: 500;
-  font-size: 18px;
-  color: var(--ink);
-}
-.founders-photo {
-  width: 100%;
-  height: auto;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  display: block;
-}
-
 /* ── FAQ ──────────────────────────────────────────────── */
 .faq-list {
   margin-top: clamp(32px, 4vw, 48px);
@@ -697,8 +666,7 @@ em {
 /* ── Responsive collapse ──────────────────────────────── */
 @media (max-width: 820px) {
   .agent-row,
-  .why-cols,
-  .founders-grid {
+  .why-cols {
     grid-template-columns: 1fr;
   }
   .agent-row:nth-child(even) .agent-media {

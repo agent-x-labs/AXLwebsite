@@ -6,7 +6,6 @@ import { AgentsSection } from "@/components/sections/agents-section";
 import { MathSection } from "@/components/sections/math-section";
 import { HowSection } from "@/components/sections/how-section";
 import { WhySection } from "@/components/sections/why-section";
-import { FoundersSection } from "@/components/sections/founders-section";
 import { FaqSection } from "@/components/sections/faq-section";
 import { CtaSection } from "@/components/sections/cta-section";
 import { SiteFooter } from "@/components/sections/site-footer";
@@ -23,7 +22,6 @@ export default function Home() {
         <MathSection />
         <HowSection />
         <WhySection />
-        <FoundersSection />
         <FaqSection />
         <CtaSection />
       </main>

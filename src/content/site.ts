@@ -14,7 +14,6 @@ export const NAV_LINKS: readonly NavLink[] = [
   { label: "What we build", href: "#agents" },
   { label: "How it works", href: "#how" },
   { label: "The math", href: "#math" },
-  { label: "Team", href: "#founders" },
 ] as const;
 
 export const HERO = {
@@ -74,16 +73,6 @@ export const WHY = {
     "Lock you into a year-long contract",
     "Disappear after go-live",
   ],
-} as const;
-
-export const FOUNDERS = {
-  eyebrow: "The team",
-  headline: "Why we left the boardroom.",
-  body: [
-    "We spent years building systems for some of the biggest firms in the world. Then we watched the businesses that actually power this country — the ones answering their own phones at 8pm — get left behind by the same technology.",
-    "So we left to fix that. Agent X Labs brings enterprise-grade AI to the businesses that need it most, built bespoke, done for you, and priced to make sense.",
-  ],
-  signoff: "— Alex & Tengiz, founders",
 } as const;
 
 export interface Faq {
