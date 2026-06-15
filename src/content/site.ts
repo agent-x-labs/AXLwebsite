@@ -108,3 +108,14 @@ export const CTA = {
   body: "Book a free 30-minute strategy call. We'll show you exactly where you're losing business — and the agents that fix it. Whether you hire us or not.",
   note: "30 minutes · no commitment · 3 specific recommendations to keep",
 } as const;
+
+/** Registered company details — single source of truth for legal pages. */
+export const COMPANY = {
+  legalName: "Agent X Labs LTD",
+  email: "info@agentxlabs.com",
+  address: "F3 Bench, 22 Kings Bench Street, SE1 0QX London, United Kingdom",
+  placeOfRegistration: "England and Wales",
+  companyRegistrationNumber: "17105341",
+} as const;
+
+export const LEGAL_LAST_UPDATED = "30 March 2026";

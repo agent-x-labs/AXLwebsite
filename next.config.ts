@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   // Baseline security headers on every response.
+  // (www → apex redirect lives in vercel.json — Vercel-native, edge-level.)
   async headers() {
     return [
       {
