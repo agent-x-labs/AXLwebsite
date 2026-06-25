@@ -44,7 +44,7 @@ export const PEDIGREE: { label: string; logos: PedigreeLogo[] } = {
     { src: "/logos/mckinsey.svg", alt: "McKinsey & Company" },
     { src: "/logos/william-blair.svg", alt: "William Blair" },
     { src: "/logos/cambridge.svg", alt: "University of Cambridge" },
-    { src: "/logos/bank-of-georgia.svg", alt: "Bank of Georgia" },
+    { src: "/logos/bank-of-georgia.png", alt: "Bank of Georgia" },
   ],
 };
 
