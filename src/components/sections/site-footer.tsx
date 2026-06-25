@@ -4,7 +4,7 @@ export function SiteFooter() {
       <div className="container footer-inner">
         <a className="nav-logo" href="#top" aria-label="Agent X Labs - home">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/brand/logo_axl.png" alt="Agent X Labs" />
+          <img src="/brand/AXLLogoDarkBG.svg" alt="Agent X Labs" />
         </a>
         <nav className="footer-links" aria-label="Legal">
           <a href="/privacy-policy">Privacy</a>

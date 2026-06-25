@@ -54,7 +54,7 @@ const ORG_JSONLD = {
   "@type": "Organization",
   name: "Agent X Labs",
   url: SITE_URL,
-  logo: `${SITE_URL}/brand/logo_axl.png`,
+  logo: `${SITE_URL}/brand/AXLLogoLightBG.png`,
   description: DESCRIPTION,
 };
 

@@ -327,9 +327,11 @@ em {
   width: auto;
   display: block;
 }
+.nav-logo .logo-dark {
+  display: none;
+}
 .site-footer .nav-logo img {
   height: 24px;
-  filter: brightness(0) invert(1);
 }
 .nav-right {
   display: flex;
@@ -882,17 +884,22 @@ em {
   --line-soft: #221b30;
 }
 
-/* Pedigree logos: light silhouettes on dark by default, full colour on hover */
-:root[data-theme="dark"] .pedigree-logo {
-  filter: brightness(0) invert(1);
+/* Logos section stays light in dark mode so the brand logos read true */
+:root[data-theme="dark"] .pedigree {
+  background: #f5f1e9;
+  border-top-color: #e9e2d4;
+  border-bottom-color: #e9e2d4;
 }
-:root[data-theme="dark"] .pedigree-logo:hover {
-  filter: none;
+:root[data-theme="dark"] .pedigree .mono-label {
+  color: #8a8190;
 }
 
-/* Wordmark in the nav: white on the dark bar */
-:root[data-theme="dark"] .site-nav .nav-logo img {
-  filter: brightness(0) invert(1);
+/* Nav wordmark: show the dark-bg lockup in dark mode */
+:root[data-theme="dark"] .site-nav .nav-logo .logo-light {
+  display: none;
+}
+:root[data-theme="dark"] .site-nav .nav-logo .logo-dark {
+  display: block;
 }
 
 /* Animations keep their light backgrounds — frame them as raised light panels */

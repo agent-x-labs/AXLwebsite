@@ -13,7 +13,9 @@ export function SiteNav() {
         <div className="nav-inner">
           <a className="nav-logo" href="#top" aria-label="Agent X Labs - home">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/brand/logo_axl.png" alt="Agent X Labs" />
+            <img className="logo-light" src="/brand/AXLLogoLightBG.svg" alt="Agent X Labs" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img className="logo-dark" src="/brand/AXLLogoDarkBG.svg" alt="" aria-hidden="true" />
           </a>
           <div className="nav-right">
             <div className="nav-links">
