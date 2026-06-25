@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8" />
+    <title>How 03 — Live &amp; earning</title>
+    <link rel="stylesheet" href="_kit.css" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      #card { left: 300px; top: 150px; width: 1320px; height: 780px; }
+      #hd { position: absolute; left: 360px; top: 206px; }
+      #hd .step { font-family: var(--display); font-weight: 600; font-size: 30px; letter-spacing: 0.12em; color: var(--violet); }
+      #hd .ttl { font-family: var(--display); font-weight: 600; font-size: 76px; letter-spacing: -0.02em; margin-top: 12px; }
+      .livepill { position: absolute; left: 360px; top: 430px; display: inline-flex; align-items: center; gap: 16px;
+        padding: 14px 28px; border-radius: 999px; font-family: var(--display); font-weight: 600; font-size: 28px; letter-spacing: 0.12em; }
+      .livepill .d { width: 16px; height: 16px; border-radius: 50%; flex: none; }
+      #live-off { border: 1px solid var(--line); background: var(--paper); color: var(--ink-muted); }
+      #live-off .d { background: var(--ink-muted); }
+      #live-on { border: 1px solid var(--teal); background: color-mix(in srgb, var(--teal) 12%, var(--card)); color: var(--teal-deep); opacity: 0; }
+      #live-on .d { background: var(--teal); }
+      #counter { position: absolute; left: 360px; top: 540px; }
+      #counter .v { font-family: var(--display); font-weight: 600; font-size: 150px; letter-spacing: -0.04em; color: var(--ink); line-height: 1; }
+      #counter .lab { font-family: var(--display); font-weight: 600; font-size: 28px; color: var(--ink-muted); margin-top: 14px; letter-spacing: 0.04em; }
+      #chart { position: absolute; left: 880px; top: 380px; width: 700px; height: 460px; }
+    </style>
+  </head>
+  <body>
+    <div id="stage" class="stage" data-composition-id="how-03" data-width="1920" data-height="1080" data-start="0" data-duration="6">
+      <div class="ambient"></div>
+      <div id="card" class="card"></div>
+      <div id="hd"><div class="step">STEP 03</div><div class="ttl">Live &amp; earning</div></div>
+
+      <div class="livepill" id="live-off"><span class="d"></span>OFFLINE</div>
+      <div class="livepill" id="live-on"><span class="d"></span>LIVE</div>
+      <div id="counter"><div class="v" id="num">£0</div><div class="lab">earned · week one</div></div>
+
+      <svg id="chart" viewBox="0 0 700 460">
+        <defs>
+          <linearGradient id="ln" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#00bf8f" /><stop offset="1" stop-color="#8e2de2" /></linearGradient>
+          <linearGradient id="fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#00bf8f" stop-opacity="0.22" /><stop offset="1" stop-color="#00bf8f" stop-opacity="0" /></linearGradient>
+        </defs>
+        <line x1="20" y1="420" x2="680" y2="420" stroke="#dcd4c5" stroke-width="2" />
+        <path id="area" d="M40 400 C 180 380, 280 320, 380 280 S 560 150, 660 90 L 660 420 L 40 420 Z" fill="url(#fill)" opacity="0" />
+        <path id="rev" d="M40 400 C 180 380, 280 320, 380 280 S 560 150, 660 90" fill="none" stroke="url(#ln)" stroke-width="6" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" />
+        <circle id="endp" cx="660" cy="90" r="11" fill="#8e2de2" opacity="0" />
+      </svg>
+      <div class="grain"></div>
+
+      <script>
+        (function () {
+          const tl = gsap.timeline({ paused: true });
+          const num = document.getElementById("num");
+          const money = { v: 0 };
+          gsap.set("#rev", { strokeDashoffset: 1 });
+          gsap.set(["#area", "#endp", "#live-on"], { opacity: 0 });
+
+          // flip live (cross-fade two pills — tween-only, seek-safe)
+          tl.to("#live-off", { opacity: 0, duration: 0.3 }, 0.5);
+          tl.fromTo("#live-on", { opacity: 0, scale: 0.94 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)", immediateRender: false }, 0.5);
+
+          // revenue line draws up + counter counts (tween onUpdate is seek-safe)
+          tl.to("#rev", { strokeDashoffset: 0, duration: 1.7, ease: "power1.inOut" }, 0.9);
+          tl.to("#area", { opacity: 1, duration: 1.2, ease: "power1.out" }, 1.1);
+          tl.to("#endp", { opacity: 1, duration: 0.3 }, 2.4);
+          tl.to(money, { v: 12400, duration: 1.7, ease: "power1.inOut",
+            onUpdate() { num.textContent = "£" + Math.round(money.v).toLocaleString("en-GB"); } }, 0.9);
+          tl.fromTo("#endp", { scale: 1 }, { scale: 1.5, duration: 0.5, yoyo: true, repeat: 1, svgOrigin: "660 90", immediateRender: false }, 2.6);
+
+          // reset for seamless loop — all tweens, no callbacks
+          tl.to("#live-on", { opacity: 0, duration: 0.3 }, 5.1);
+          tl.to("#live-off", { opacity: 1, duration: 0.4 }, 5.1);
+          tl.to(["#area", "#endp"], { opacity: 0, duration: 0.4 }, 4.9);
+          tl.to("#rev", { strokeDashoffset: 1, duration: 0.5, ease: "power2.in" }, 4.9);
+          tl.to("#counter", { opacity: 0, duration: 0.35 }, 4.9);
+          tl.to(money, { v: 0, duration: 0.3, onUpdate() { num.textContent = "£" + Math.round(money.v).toLocaleString("en-GB"); } }, 5.05);
+          tl.to("#counter", { opacity: 1, duration: 0.4 }, 5.4);
+
+          window.__timelines = window.__timelines || {};
+          window.__timelines["how-03"] = tl;
+        })();
+      </script>
+    </div>
+  </body>
+</html>

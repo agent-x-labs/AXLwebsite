@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Reception Agent</title>
+    <link rel="stylesheet" href="_kit.css" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      #card { left: 360px; top: 196px; width: 1200px; height: 688px; }
+      #head { left: 412px; top: 248px; width: 1096px; }
+      #head .phone {
+        width: 64px; height: 64px; border-radius: 50%; flex: none;
+        background: color-mix(in srgb, var(--violet) 12%, var(--card));
+        border: 1px solid color-mix(in srgb, var(--violet) 40%, transparent);
+        display: flex; align-items: center; justify-content: center; color: var(--violet); }
+      #head .label { margin-left: 20px; }
+      .status { position: absolute; right: 0; top: 6px; }
+      .beat { position: absolute; left: 412px; width: 1096px; top: 392px; }
+
+      /* Beat 1 — incoming call */
+      #b1 { top: 452px; display: flex; align-items: center; gap: 56px; }
+      .avatar { position: relative; width: 168px; height: 168px; flex: none; }
+      .avatar .face { position: absolute; inset: 0; border-radius: 50%; z-index: 2;
+        background: color-mix(in srgb, var(--violet) 14%, var(--card)); border: 1px solid color-mix(in srgb, var(--violet) 42%, transparent);
+        display: flex; align-items: center; justify-content: center; color: var(--violet); }
+      .avatar .face svg { width: 78px; height: 78px; }
+      .ringwave { position: absolute; inset: 0; border-radius: 50%; border: 2px solid var(--violet); opacity: 0; z-index: 1; }
+      .callinfo .cname { font-family: var(--display); font-weight: 600; font-size: 76px; letter-spacing: -0.02em; line-height: 1; }
+      .callinfo .csub { font-size: 34px; color: var(--ink-soft); margin-top: 12px; }
+      .callinfo .cstat { font-family: var(--display); font-weight: 600; font-size: 26px; color: var(--ink-muted); margin-top: 18px; letter-spacing: 0.04em; }
+
+      /* Beat 2 — answered + qualified */
+      .wave { display: flex; align-items: flex-end; gap: 13px; height: 150px; }
+      .wave i { width: 18px; height: 150px; border-radius: 9px; background: var(--teal); display: block; transform-origin: bottom; }
+      .qrow { display: flex; align-items: center; gap: 22px; margin-top: 28px; font-size: 36px; }
+
+      /* Beat 3 — booked */
+      .cal { display: flex; gap: 18px; margin-top: 20px; }
+      .cal .cell { width: 150px; height: 150px; border-radius: 18px; border: 1px solid var(--line);
+        background: var(--paper); display: flex; flex-direction: column; align-items: center; justify-content: center; }
+      .cal .cell .d { font-family: var(--display); font-weight: 600; font-size: 22px; color: var(--ink-muted); }
+      .cal .cell .n { font-family: var(--display); font-weight: 600; font-size: 40px; margin-top: 6px; }
+      .cal .cell.book { border-color: var(--teal); background: color-mix(in srgb, var(--teal) 12%, var(--card)); }
+      .cal .cell.book .n { color: var(--teal-deep); }
+    </style>
+  </head>
+  <body>
+    <div id="stage" class="stage" data-composition-id="reception" data-width="1920" data-height="1080" data-start="0" data-duration="7">
+      <div class="ambient"></div>
+      <div id="card" class="card"></div>
+
+      <div id="head" class="row">
+        <div class="phone">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <div class="label" style="color: var(--violet)">Reception Agent</div>
+        <div class="status">
+          <div class="chip violet" id="st-in"><span class="dot violet"></span>Incoming call</div>
+          <div class="chip teal" id="st-ans" style="position:absolute; right:0; top:0; opacity:0"><span class="dot teal"></span>Answering</div>
+          <div class="chip teal" id="st-book" style="position:absolute; right:0; top:0; opacity:0"><span class="dot teal"></span>Booked</div>
+        </div>
+      </div>
+
+      <!-- Beat 1: incoming -->
+      <div id="b1" class="beat">
+        <div class="avatar">
+          <div class="ringwave" id="r1"></div>
+          <div class="ringwave" id="r2"></div>
+          <div class="face"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        </div>
+        <div class="callinfo">
+          <div class="cname">Sarah</div>
+          <div class="csub">New enquiry · mobile</div>
+          <div class="cstat">Calling — 11:48 pm</div>
+        </div>
+      </div>
+
+      <!-- Beat 2: answered + qualified -->
+      <div id="b2" class="beat" style="opacity:0; top: 388px">
+        <div style="display:flex; align-items:flex-end; gap: 60px">
+          <div><div class="label">Answered in</div><div class="big" style="font-size: 132px; color: var(--teal-deep)">2s</div></div>
+          <div class="wave" id="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+        <div style="margin-top: 24px">
+          <div class="qrow"><span class="dot teal"></span><span class="soft">Name &amp; number captured</span></div>
+          <div class="qrow"><span class="dot teal"></span><span class="soft">Job: kitchen refit</span></div>
+          <div class="qrow"><span class="dot teal"></span><span class="soft">Ready: this month</span></div>
+        </div>
+      </div>
+
+      <!-- Beat 3: booked -->
+      <div id="b3" class="beat" style="opacity:0; top: 416px">
+        <div class="label">Booked straight into your calendar</div>
+        <div class="cal">
+          <div class="cell"><span class="d">Mon</span><span class="n">9</span></div>
+          <div class="cell book" id="bookcell"><span class="d">Tue</span><span class="n">10</span></div>
+          <div class="cell"><span class="d">Wed</span><span class="n">11</span></div>
+          <div class="cell"><span class="d">Thu</span><span class="n">12</span></div>
+          <div class="cell"><span class="d">Fri</span><span class="n">13</span></div>
+        </div>
+        <div class="big" style="font-size: 48px; margin-top: 30px; color: var(--teal-deep)">Tue · 2:00 pm — confirmed</div>
+      </div>
+      <div class="grain"></div>
+
+      <script>
+        (function () {
+          const tl = gsap.timeline({ paused: true });
+          gsap.set(["#b2", "#b3", "#st-ans", "#st-book"], { opacity: 0 });
+          gsap.set("#b1", { opacity: 1 });
+
+          // Beat 1 — rings emanate from the caller avatar
+          [["#r1", 0.2], ["#r2", 0.75], ["#r1", 1.3]].forEach(([sel, t]) => {
+            tl.fromTo(sel, { scale: 1, opacity: 0.5 }, { scale: 2.5, opacity: 0, duration: 1.25, ease: "power1.out", immediateRender: false }, t);
+          });
+
+          // → answered
+          tl.to("#st-in", { opacity: 0, duration: 0.3 }, 2.1);
+          tl.to("#st-ans", { opacity: 1, duration: 0.3 }, 2.2);
+          tl.to("#b1", { opacity: 0, y: -22, duration: 0.4, ease: "power2.in" }, 2.0);
+          tl.fromTo("#b2", { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out", immediateRender: false }, 2.35);
+          tl.fromTo("#wave i", { scaleY: 0.16 }, { scaleY: 1, duration: 0.5, ease: "sine.inOut", stagger: { each: 0.06, yoyo: true, repeat: 3, from: "center" }, immediateRender: false }, 2.5);
+          tl.fromTo("#b2 .qrow", { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.4, stagger: 0.18, ease: "power2.out", immediateRender: false }, 2.7);
+
+          // → booked
+          tl.to("#st-ans", { opacity: 0, duration: 0.3 }, 4.3);
+          tl.to("#st-book", { opacity: 1, duration: 0.3 }, 4.4);
+          tl.to("#b2", { opacity: 0, y: -22, duration: 0.4, ease: "power2.in" }, 4.2);
+          tl.fromTo("#b3", { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out", immediateRender: false }, 4.55);
+          tl.fromTo("#bookcell", { scale: 0.8 }, { scale: 1, duration: 0.6, ease: "back.out(1.6)", immediateRender: false }, 4.9);
+
+          // → loop back to incoming (land on beat-1 settled state)
+          tl.to(["#b3", "#st-book"], { opacity: 0, duration: 0.4, ease: "power2.in" }, 6.4);
+          tl.to("#st-in", { opacity: 1, duration: 0.4 }, 6.55);
+          tl.fromTo("#b1", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out", immediateRender: false }, 6.55);
+
+          window.__timelines = window.__timelines || {};
+          window.__timelines["reception"] = tl;
+        })();
+      </script>
+    </div>
+  </body>
+</html>

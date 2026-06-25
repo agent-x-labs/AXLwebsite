@@ -1,0 +1,5 @@
+# Derived / regenerable — source of truth is clips/*.html + build.mjs
+node_modules/
+build/
+renders/
+.debug/

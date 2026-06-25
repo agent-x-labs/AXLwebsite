@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agent X Labs — Motion preview</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --paper: #f5f1e9; --paper-2: #ece6d9; --card: #fbf8f1;
+        --ink: #1a1622; --ink-soft: #4a4350; --ink-muted: #8a8190;
+        --line: #dcd4c5; --violet: #8e2de2; --teal: #00bf8f;
+        --display: "Space Grotesk", sans-serif; --mono: "Space Mono", monospace;
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--display);
+        -webkit-font-smoothing: antialiased; }
+      .wrap { max-width: 1280px; margin: 0 auto; padding: 64px 32px 120px; }
+      header { border-bottom: 1px solid var(--line); padding-bottom: 32px; margin-bottom: 56px; }
+      .eyebrow { font-family: var(--mono); font-size: 13px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--violet); }
+      h1 { font-weight: 600; font-size: clamp(2rem, 1rem + 3vw, 3.4rem); letter-spacing: -0.025em; margin: 14px 0 0; max-width: 20ch; line-height: 1.05; }
+      .sub { color: var(--ink-soft); font-size: 1.05rem; max-width: 60ch; margin-top: 18px; line-height: 1.55; }
+      .legend { display: flex; gap: 28px; flex-wrap: wrap; margin-top: 24px; font-family: var(--mono); font-size: 13px; color: var(--ink-muted); }
+      .legend span { display: inline-flex; align-items: center; gap: 9px; }
+      .swatch { width: 13px; height: 13px; border-radius: 50%; }
+      .note { display: inline-block; margin-top: 22px; font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.04em;
+        color: var(--teal); border: 1px solid color-mix(in srgb, var(--teal) 40%, transparent); border-radius: 999px; padding: 8px 16px; }
+      h2 { font-weight: 600; font-size: 1.5rem; letter-spacing: -0.02em; margin: 64px 0 6px; }
+      h2 .e { font-family: var(--mono); font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--violet); display: block; margin-bottom: 10px; font-weight: 400; }
+      .sechint { color: var(--ink-muted); font-size: 0.95rem; margin: 0 0 26px; }
+      .grid { display: grid; gap: 30px; }
+      .grid.two { grid-template-columns: repeat(2, 1fr); }
+      .grid.three { grid-template-columns: repeat(3, 1fr); }
+      figure { margin: 0; }
+      .stagebox { position: relative; width: 100%; aspect-ratio: 16/9; border: 1px solid var(--line); border-radius: 16px;
+        overflow: hidden; background: var(--card); box-shadow: 0 30px 60px -40px rgba(26,18,30,.4); }
+      .stagebox video { width: 100%; height: 100%; object-fit: cover; display: block; }
+      figcaption { margin-top: 16px; }
+      .cap-title { font-weight: 600; font-size: 1.15rem; letter-spacing: -0.01em; }
+      .cap-tag { color: var(--ink-soft); font-size: 0.98rem; margin-top: 3px; }
+      .cap-meta { font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.04em; color: var(--ink-muted); margin-top: 10px; text-transform: uppercase; }
+      .pill { display: inline-block; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--line); margin-right: 7px; }
+      .pill.v { color: var(--violet); border-color: color-mix(in srgb, var(--violet) 40%, transparent); }
+      .pill.t { color: var(--teal); border-color: color-mix(in srgb, var(--teal) 40%, transparent); }
+      @media (max-width: 880px) { .grid.two, .grid.three { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <div class="eyebrow">HyperFrames · Motion preview</div>
+        <h1>Animations for agentxlabs.com</h1>
+        <p class="sub">Seven clips authored in HeyGen HyperFrames (HTML/CSS/GSAP → deterministic MP4), rendered at 1920×1080 and looping seamlessly. Each is built in the site's own visual language so it sits inside the existing card frames untouched.</p>
+        <div class="legend">
+          <span><i class="swatch" style="background: var(--violet)"></i> Violet = voice (the agent)</span>
+          <span><i class="swatch" style="background: var(--teal)"></i> Teal = signal (the result)</span>
+        </div>
+        <div class="note">● Preview only — nothing embedded into the live site yet</div>
+      </header>
+
+      <section>
+        <h2><span class="e">What we build</span>The four agents</h2>
+        <p class="sechint">Each clip dramatises what the agent actually does, in the product's own UI language.</p>
+        <div class="grid two">
+          <figure>
+            <div class="stagebox"><video src="renders/reception.mp4" autoplay muted loop playsinline></video></div>
+            <figcaption><div class="cap-title">Reception Agent</div><div class="cap-tag">Never miss a lead.</div><div class="cap-meta"><span class="pill t">product-in-motion</span> call → answered in 2s → booked</div></figcaption>
+          </figure>
+          <figure>
+            <div class="stagebox"><video src="renders/lead-reactivation.mp4" autoplay muted loop playsinline></video></div>
+            <figcaption><div class="cap-title">Lead Reactivation Agent</div><div class="cap-tag">The revenue's already in your database.</div><div class="cap-meta"><span class="pill v">metaphor</span> dead leads re-ignite under a scan</div></figcaption>
+          </figure>
+          <figure>
+            <div class="stagebox"><video src="renders/after-sales.mp4" autoplay muted loop playsinline></video></div>
+            <figcaption><div class="cap-title">After-Sales Agent</div><div class="cap-tag">Every job becomes the next one.</div><div class="cap-meta"><span class="pill t">cycle / metaphor</span> job → review → referral → next job</div></figcaption>
+          </figure>
+          <figure>
+            <div class="stagebox"><video src="renders/content-marketing.mp4" autoplay muted loop playsinline></video></div>
+            <figcaption><div class="cap-title">Content Marketing Agent</div><div class="cap-tag">Be the first call when they're ready.</div><div class="cap-meta"><span class="pill t">product-in-motion</span> plan → write → publish</div></figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section>
+        <h2><span class="e">How it works</span>The three steps</h2>
+        <p class="sechint">Bolder and more single-focus — these display three-up and smaller on the site.</p>
+        <div class="grid three">
+          <figure>
+            <div class="stagebox"><video src="renders/how-01.mp4" autoplay muted loop playsinline></video></div>
+            <figcaption><div class="cap-title">01 · Strategy call</div><div class="cap-meta">find where you're leaking revenue</div></figcaption>
+          </figure>
+          <figure>
+            <div class="stagebox"><video src="renders/how-02.mp4" autoplay muted loop playsinline></video></div>
+            <figcaption><div class="cap-title">02 · We build it</div><div class="cap-meta">wired into your tools</div></figcaption>
+          </figure>
+          <figure>
+            <div class="stagebox"><video src="renders/how-03.mp4" autoplay muted loop playsinline></video></div>
+            <figcaption><div class="cap-title">03 · Live &amp; earning</div><div class="cap-meta">goes live, revenue ticks up</div></figcaption>
+          </figure>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

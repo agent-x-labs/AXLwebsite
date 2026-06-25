@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Lead Reactivation Agent</title>
+    <link rel="stylesheet" href="_kit.css" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      #card { left: 360px; top: 150px; width: 1200px; height: 780px; }
+      #head { left: 412px; top: 200px; width: 1096px; }
+      #list { position: absolute; left: 412px; top: 300px; width: 1096px; }
+      .lead { position: relative; display: flex; align-items: center; height: 112px; padding: 0 26px;
+        border-radius: 18px; border: 1px solid var(--line-soft); background: var(--paper);
+        margin-bottom: 18px; opacity: 0.5; }
+      .lead .av { width: 64px; height: 64px; border-radius: 50%; flex: none; display: flex; align-items: center;
+        justify-content: center; font-family: var(--display); font-weight: 600; font-size: 26px; color: var(--ink-muted);
+        background: color-mix(in srgb, var(--ink-muted) 16%, var(--card)); border: 1px solid var(--line); }
+      .lead .who { margin-left: 24px; }
+      .lead .who .nm { font-family: var(--display); font-weight: 600; font-size: 38px; color: var(--ink); }
+      .lead .who .sub { font-family: var(--display); font-weight: 600; font-size: 22px; color: var(--ink-muted); margin-top: 4px; }
+      .lead .st { position: absolute; right: 26px; top: 50%; transform: translateY(-50%); }
+      .lead .st .chip { position: absolute; right: 0; top: -28px; }
+      #scan { position: absolute; left: 400px; width: 1120px; height: 5px; border-radius: 4px; top: 300px;
+        background: linear-gradient(100deg, var(--teal), var(--violet)); opacity: 0; filter: drop-shadow(0 0 16px rgba(142,45,226,.5)); }
+    </style>
+  </head>
+  <body>
+    <div id="stage" class="stage" data-composition-id="lead-reactivation" data-width="1920" data-height="1080" data-start="0" data-duration="7">
+      <div class="ambient"></div>
+      <div id="card" class="card"></div>
+      <div id="head" class="row" style="justify-content: space-between">
+        <div class="label" style="color: var(--violet)">Lead Reactivation Agent</div>
+        <div class="chip violet"><span class="dot violet"></span>Reviving your database</div>
+      </div>
+
+      <div id="list">
+        <div class="lead"><div class="av">TR</div><div class="who"><div class="nm">Tom Reeves</div><div class="sub">Cold · 52 days</div></div>
+          <div class="st"><span class="chip cold"><span class="dot rest"></span>Cold</span><span class="chip teal warm" style="opacity:0"><span class="dot teal"></span>Warm</span></div></div>
+        <div class="lead"><div class="av">PN</div><div class="who"><div class="nm">Priya Nair</div><div class="sub">Quote sent · 38 days</div></div>
+          <div class="st"><span class="chip cold"><span class="dot rest"></span>Cold</span><span class="chip teal warm" style="opacity:0"><span class="dot teal"></span>Replied · booked</span></div></div>
+        <div class="lead"><div class="av">JW</div><div class="who"><div class="nm">James Whyte</div><div class="sub">Cold · 61 days</div></div>
+          <div class="st"><span class="chip cold"><span class="dot rest"></span>Cold</span><span class="chip teal warm" style="opacity:0"><span class="dot teal"></span>Warm</span></div></div>
+        <div class="lead"><div class="av">AK</div><div class="who"><div class="nm">Aisha Khan</div><div class="sub">Cold · 44 days</div></div>
+          <div class="st"><span class="chip cold"><span class="dot rest"></span>Cold</span><span class="chip teal warm" style="opacity:0"><span class="dot teal"></span>Warm</span></div></div>
+      </div>
+      <div id="scan"></div>
+      <div class="grain"></div>
+
+      <script>
+        (function () {
+          const tl = gsap.timeline({ paused: true });
+          const leads = gsap.utils.toArray(".lead");
+          const rowTop = 300, rowH = 130;
+
+          gsap.set("#scan", { top: rowTop - 8, opacity: 0 });
+
+          // scan sweep down the list
+          tl.to("#scan", { opacity: 1, duration: 0.3 }, 0.5);
+          tl.to("#scan", { top: rowTop + leads.length * rowH - 30, duration: 2.5, ease: "none" }, 0.6);
+          tl.to("#scan", { opacity: 0, duration: 0.3 }, 3.1);
+
+          leads.forEach((row, i) => {
+            const t = 0.9 + i * 0.6;
+            const isBooked = i === 1;
+            const accent = isBooked ? getComputedStyle(document.documentElement).getPropertyValue("--teal") : getComputedStyle(document.documentElement).getPropertyValue("--violet");
+            // re-ignite: brighten the row + flash the avatar
+            tl.to(row, { opacity: 1, duration: 0.5, ease: "power2.out" }, t);
+            tl.fromTo(row, { boxShadow: "0 0 0 rgba(142,45,226,0)" }, { boxShadow: "0 0 38px -6px " + accent.trim() + "66", duration: 0.4, yoyo: true, repeat: 1, ease: "sine.inOut" }, t);
+            tl.to(row.querySelector(".av"), { color: accent.trim(), borderColor: accent.trim(), backgroundColor: "color-mix(in srgb, " + accent.trim() + " 14%, var(--card))", duration: 0.5 }, t);
+            // status flip Cold -> Warm/Booked
+            tl.to(row.querySelector(".cold"), { opacity: 0, duration: 0.3 }, t + 0.25);
+            tl.fromTo(row.querySelector(".warm"), { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, t + 0.3);
+            if (isBooked) {
+              tl.to(row, { scale: 1.035, duration: 0.4, ease: "back.out(2)", transformOrigin: "center" }, t + 0.4);
+              tl.to(row, { scale: 1, duration: 0.5, ease: "power2.out" }, t + 1.1);
+            }
+          });
+
+          // hold, then dim back to cold for a seamless loop
+          const tReset = 6.2;
+          leads.forEach((row) => {
+            tl.to(row, { opacity: 0.5, scale: 1, duration: 0.4, ease: "power2.in" }, tReset);
+            tl.to(row.querySelector(".av"), { color: "#8a8190", borderColor: "#dcd4c5", backgroundColor: "color-mix(in srgb, #8a8190 16%, var(--card))", duration: 0.4 }, tReset);
+            tl.to(row.querySelector(".warm"), { opacity: 0, duration: 0.3 }, tReset);
+            tl.to(row.querySelector(".cold"), { opacity: 1, duration: 0.4 }, tReset + 0.15);
+          });
+
+          window.__timelines = window.__timelines || {};
+          window.__timelines["lead-reactivation"] = tl;
+        })();
+      </script>
+    </div>
+  </body>
+</html>
