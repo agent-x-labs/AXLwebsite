@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { SITE, NAV_LINKS } from "@/content/site";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export function SiteNav() {
   const [open, setOpen] = useState(false);
@@ -22,6 +23,7 @@ export function SiteNav() {
                 </a>
               ))}
             </div>
+            <ThemeToggle />
             <a className="btn btn-primary" href={SITE.bookingUrl} target="_blank" rel="noopener noreferrer">
               {SITE.bookingLabel}
             </a>
