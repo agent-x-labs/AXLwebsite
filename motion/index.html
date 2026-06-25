@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en" data-resolution="landscape">
+  <!-- Required by `hyperframes render` as the project's base composition.
+       Real clips live in clips/*.html and are rendered with `-c` (see build.mjs). -->
+  <head>
+    <meta charset="UTF-8" />
+    <title>Agent X Labs — motion</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      body, html { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #f5f1e9; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="index" data-width="1920" data-height="1080" data-start="0" data-duration="1">
+      <script>
+        window.__timelines = window.__timelines || {};
+        window.__timelines["index"] = gsap.timeline({ paused: true });
+      </script>
+    </div>
+  </body>
+</html>

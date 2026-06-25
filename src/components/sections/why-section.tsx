@@ -1,4 +1,5 @@
 import { WHY } from "@/content/site";
+import { Reveal } from "@/components/anim";
 
 export function WhySection() {
   return (
@@ -12,16 +13,20 @@ export function WhySection() {
           <div className="why-col">
             <div className="why-col-label">{WHY.doLabel}</div>
             <ul className="why-list why-do">
-              {WHY.does.map((item) => (
-                <li key={item}>{item}</li>
+              {WHY.does.map((item, i) => (
+                <Reveal as="li" key={item} delayMs={i * 70}>
+                  {item}
+                </Reveal>
               ))}
             </ul>
           </div>
           <div className="why-col">
             <div className="why-col-label">{WHY.dontLabel}</div>
             <ul className="why-list why-dont">
-              {WHY.donts.map((item) => (
-                <li key={item}>{item}</li>
+              {WHY.donts.map((item, i) => (
+                <Reveal as="li" key={item} delayMs={i * 70}>
+                  {item}
+                </Reveal>
               ))}
             </ul>
           </div>

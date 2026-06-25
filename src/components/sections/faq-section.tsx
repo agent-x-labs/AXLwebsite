@@ -1,4 +1,5 @@
 import { FAQS } from "@/content/site";
+import { Reveal } from "@/components/anim";
 
 export function FaqSection() {
   return (
@@ -8,13 +9,13 @@ export function FaqSection() {
         <h2 style={{ marginTop: 18 }}>Questions, answered.</h2>
         <div className="faq-list">
           {FAQS.map((faq, i) => (
-            <div className="faq-item" key={faq.q}>
+            <Reveal as="div" className="faq-item" key={faq.q} delayMs={i * 60}>
               <div className="q-num">Q{i + 1}</div>
               <div>
                 <div className="faq-q">{faq.q}</div>
                 <p className="faq-a">{faq.a}</p>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>

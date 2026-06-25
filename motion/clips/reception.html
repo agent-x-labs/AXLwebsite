@@ -17,7 +17,7 @@
       .status { position: absolute; right: 0; top: 6px; }
       .beat { position: absolute; left: 412px; width: 1096px; top: 392px; }
 
-      /* Beat 1 — incoming call */
+      /* Beat 1 - incoming call */
       #b1 { top: 452px; display: flex; align-items: center; gap: 56px; }
       .avatar { position: relative; width: 168px; height: 168px; flex: none; }
       .avatar .face { position: absolute; inset: 0; border-radius: 50%; z-index: 2;
@@ -29,12 +29,12 @@
       .callinfo .csub { font-size: 34px; color: var(--ink-soft); margin-top: 12px; }
       .callinfo .cstat { font-family: var(--display); font-weight: 600; font-size: 26px; color: var(--ink-muted); margin-top: 18px; letter-spacing: 0.04em; }
 
-      /* Beat 2 — answered + qualified */
+      /* Beat 2 - answered + qualified */
       .wave { display: flex; align-items: flex-end; gap: 13px; height: 150px; }
       .wave i { width: 18px; height: 150px; border-radius: 9px; background: var(--teal); display: block; transform-origin: bottom; }
       .qrow { display: flex; align-items: center; gap: 22px; margin-top: 28px; font-size: 36px; }
 
-      /* Beat 3 — booked */
+      /* Beat 3 - booked */
       .cal { display: flex; gap: 18px; margin-top: 20px; }
       .cal .cell { width: 150px; height: 150px; border-radius: 18px; border: 1px solid var(--line);
         background: var(--paper); display: flex; flex-direction: column; align-items: center; justify-content: center; }
@@ -71,7 +71,7 @@
         <div class="callinfo">
           <div class="cname">Sarah</div>
           <div class="csub">New enquiry · mobile</div>
-          <div class="cstat">Calling — 11:48 pm</div>
+          <div class="cstat">Calling - 11:48 pm</div>
         </div>
       </div>
 
@@ -98,7 +98,7 @@
           <div class="cell"><span class="d">Thu</span><span class="n">12</span></div>
           <div class="cell"><span class="d">Fri</span><span class="n">13</span></div>
         </div>
-        <div class="big" style="font-size: 48px; margin-top: 30px; color: var(--teal-deep)">Tue · 2:00 pm — confirmed</div>
+        <div class="big" style="font-size: 48px; margin-top: 30px; color: var(--teal-deep)">Tue · 2:00 pm - confirmed</div>
       </div>
       <div class="grain"></div>
 
@@ -108,7 +108,7 @@
           gsap.set(["#b2", "#b3", "#st-ans", "#st-book"], { opacity: 0 });
           gsap.set("#b1", { opacity: 1 });
 
-          // Beat 1 — rings emanate from the caller avatar
+          // Beat 1 - rings emanate from the caller avatar
           [["#r1", 0.2], ["#r2", 0.75], ["#r1", 1.3]].forEach(([sel, t]) => {
             tl.fromTo(sel, { scale: 1, opacity: 0.5 }, { scale: 2.5, opacity: 0, duration: 1.25, ease: "power1.out", immediateRender: false }, t);
           });

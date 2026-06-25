@@ -412,6 +412,24 @@ em {
   color: var(--ink-muted);
 }
 
+/* ── Scroll reveal (section accents) — hidden state is added by JS, so
+   no-JS and reduced-motion users see content normally ─────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+}
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 /* ── HyperFrame stage ─────────────────────────────────── */
 .hf-stage {
   position: relative;

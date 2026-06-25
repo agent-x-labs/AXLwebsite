@@ -2,7 +2,7 @@
 <html lang="en" data-resolution="landscape">
   <head>
     <meta charset="UTF-8" />
-    <title>How 03 — Live &amp; earning</title>
+    <title>How 03 - Live &amp; earning</title>
     <link rel="stylesheet" href="_kit.css" />
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
     <style>
@@ -53,7 +53,7 @@
           gsap.set("#rev", { strokeDashoffset: 1 });
           gsap.set(["#area", "#endp", "#live-on"], { opacity: 0 });
 
-          // flip live (cross-fade two pills — tween-only, seek-safe)
+          // flip live (cross-fade two pills - tween-only, seek-safe)
           tl.to("#live-off", { opacity: 0, duration: 0.3 }, 0.5);
           tl.fromTo("#live-on", { opacity: 0, scale: 0.94 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)", immediateRender: false }, 0.5);
 
@@ -65,7 +65,7 @@
             onUpdate() { num.textContent = "£" + Math.round(money.v).toLocaleString("en-GB"); } }, 0.9);
           tl.fromTo("#endp", { scale: 1 }, { scale: 1.5, duration: 0.5, yoyo: true, repeat: 1, svgOrigin: "660 90", immediateRender: false }, 2.6);
 
-          // reset for seamless loop — all tweens, no callbacks
+          // reset for seamless loop - all tweens, no callbacks
           tl.to("#live-on", { opacity: 0, duration: 0.3 }, 5.1);
           tl.to("#live-off", { opacity: 1, duration: 0.4 }, 5.1);
           tl.to(["#area", "#endp"], { opacity: 0, duration: 0.4 }, 4.9);
