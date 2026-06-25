@@ -19,7 +19,7 @@ export const AGENTS: readonly Agent[] = [
     name: "Reception Agent",
     tagline: "Never miss a lead.",
     blurb:
-      "Answers every call in seconds, qualifies the caller, and books the job — day or night.",
+      "Answers every call in seconds, qualifies the caller, and books the job - day or night.",
     bullets: ["Answers 24/7, instantly", "Qualifies the enquiry", "Books straight into your calendar"],
   },
   {
@@ -46,7 +46,7 @@ export const AGENTS: readonly Agent[] = [
     name: "Content Marketing Agent",
     tagline: "Be the first call when they're ready.",
     blurb:
-      "Creates and ships content that keeps you front-of-mind — on autopilot.",
+      "Creates and ships content that keeps you front-of-mind - on autopilot.",
     bullets: ["Plans the content", "Writes in your voice", "Posts across your channels"],
   },
 ] as const;

@@ -19,7 +19,7 @@ export function AgentsSection() {
               </div>
               <div className="agent-copy">
                 <div className="agent-num">
-                  {agent.num} — {agent.name}
+                  {agent.num} - {agent.name}
                 </div>
                 <h3 className="agent-name">{agent.tagline}</h3>
                 <p className="agent-tagline">{agent.blurb}</p>

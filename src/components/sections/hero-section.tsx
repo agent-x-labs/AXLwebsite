@@ -19,6 +19,7 @@ export function HeroSection() {
             See what we build →
           </a>
         </div>
+        <p className="hero-note">{HERO.note}</p>
       </div>
     </section>
   );

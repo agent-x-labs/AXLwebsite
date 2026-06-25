@@ -1,8 +1,8 @@
 export const SITE = {
   name: "Agent X Labs",
-  /** booking — the page-wide primary CTA */
+  /** booking - the page-wide primary CTA */
   bookingUrl: "https://cal.com/agentxlabs/agent-x-labs-strategy-call",
-  bookingLabel: "Book a strategy call",
+  bookingLabel: "Book a free strategy call",
 } as const;
 
 export interface NavLink {
@@ -23,12 +23,13 @@ export const HERO = {
   headlineGradient: "run your business",
   headlineTail: ".",
   sub: "Custom-built agents that answer your calls, revive dead leads, win reviews, and create your content.",
+  note: "30-minute call · no commitment · leave with 3 recommendations, whether you hire us or not",
 } as const;
 
 export const SHIFT = {
   eyebrow: "Why now",
   headline: "The work that used to need a team can now run itself.",
-  body: "Answering, chasing, following up, posting — the jobs that quietly decide whether you grow. The businesses that automate them first won't just save time. They'll take the customers everyone else is too slow to answer.",
+  body: "Answering, chasing, following up, posting - the jobs that quietly decide whether you grow. The businesses that automate them first won't just save time. They'll take the customers everyone else is too slow to answer.",
 } as const;
 
 export interface PedigreeLogo {
@@ -88,11 +89,11 @@ export interface Faq {
 }
 
 export const FAQS: readonly Faq[] = [
-  { q: "What exactly do you build?", a: "Custom AI agents for the repetitive, revenue-critical work in your business — answering calls, following up leads, collecting reviews, creating content. We scope the highest-leverage one on a free call, then build it bespoke." },
+  { q: "What exactly do you build?", a: "Custom AI agents for the repetitive, revenue-critical work in your business - answering calls, following up leads, collecting reviews, creating content. We scope the highest-leverage one on a free call, then build it bespoke." },
   { q: "How fast can we go live?", a: "Days, not months. Most agents are live and working within the first week after your strategy call." },
   { q: "Do I need any technical knowledge?", a: "None. We handle the entire build and wire it into the tools you already use. Your only job is the 30-minute call." },
   { q: "Will it sound robotic to my customers?", a: "No. Each agent is built around how your business actually speaks, so callers and customers get a natural, on-brand experience." },
-  { q: "What does it cost?", a: "Enterprise-grade AI at small-business pricing. We scope the exact number on the strategy call once we know which agent earns its keep fastest — no obligation either way." },
+  { q: "What does it cost?", a: "Enterprise-grade AI at small-business pricing. We scope the exact number on the strategy call once we know which agent earns its keep fastest - no obligation either way." },
   { q: "What if it doesn't work for my business?", a: "The strategy call is free and you leave with three specific recommendations whether you hire us or not. We only build what we're confident will pay for itself." },
 ] as const;
 
@@ -101,11 +102,11 @@ export const CTA = {
   headlineLead: "Stop letting revenue ",
   headlineGradient: "walk out the door",
   headlineTail: ".",
-  body: "Book a free 30-minute strategy call. We'll show you exactly where you're losing business — and the agents that fix it. Whether you hire us or not.",
+  body: "Book a free 30-minute strategy call. We'll show you exactly where you're losing business - and the agents that fix it. Whether you hire us or not.",
   note: "30 minutes · no commitment · 3 specific recommendations to keep",
 } as const;
 
-/** Registered company details — single source of truth for legal pages. */
+/** Registered company details - single source of truth for legal pages. */
 export const COMPANY = {
   legalName: "Agent X Labs LTD",
   email: "info@agentxlabs.com",

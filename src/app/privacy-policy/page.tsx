@@ -7,7 +7,7 @@ import { COMPANY, LEGAL_LAST_UPDATED } from "@/content/site";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
-    "How Agent X Labs LTD collects, uses, stores, and protects personal information when you use this website or contact us — written to reflect UK GDPR and PECR.",
+    "How Agent X Labs LTD collects, uses, stores, and protects personal information when you use this website or contact us - written to reflect UK GDPR and PECR.",
   alternates: { canonical: "/privacy-policy" },
   openGraph: {
     type: "article",
