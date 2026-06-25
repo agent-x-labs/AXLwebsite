@@ -10,7 +10,7 @@ export function PedigreeStrip() {
             // eslint-disable-next-line @next/next/no-img-element
             <img
               key={logo.src}
-              className={logo.tint === false ? "pedigree-logo pedigree-logo--natural" : "pedigree-logo"}
+              className="pedigree-logo"
               src={logo.src}
               alt={logo.alt}
             />

@@ -298,10 +298,14 @@ em {
    ════════════════════════════════════════════════════════ */
 
 /* ── Nav ──────────────────────────────────────────────── */
-.site-nav {
+/* Sticky on the <header> (#top), whose parent is <body> — the nav itself can't
+   stick because its parent <header> is only nav-height tall. */
+#top {
   position: sticky;
   top: 0;
   z-index: 100;
+}
+.site-nav {
   background: color-mix(in srgb, var(--paper) 82%, transparent);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--line-soft);
@@ -325,6 +329,7 @@ em {
 }
 .site-footer .nav-logo img {
   height: 24px;
+  filter: brightness(0) invert(1);
 }
 .nav-right {
   display: flex;
@@ -493,17 +498,13 @@ em {
 .pedigree-logo {
   height: 26px;
   width: auto;
-  filter: brightness(0);
-  opacity: 0.5;
-  transition: opacity 0.15s ease;
+  filter: grayscale(1);
+  opacity: 0.55;
+  transition: filter 0.25s ease, opacity 0.25s ease;
 }
 .pedigree-logo:hover {
-  opacity: 0.8;
-}
-/* logos that flatten to a solid box under the ink filter render in natural color */
-.pedigree-logo--natural {
   filter: none;
-  opacity: 0.9;
+  opacity: 1;
 }
 
 /* ── Agents ───────────────────────────────────────────── */
@@ -685,7 +686,8 @@ em {
 
 /* ── Footer ───────────────────────────────────────────── */
 .site-footer {
-  border-top: 1px solid var(--line);
+  background: #000;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   padding-block: 40px;
 }
 .footer-inner {
@@ -702,7 +704,7 @@ em {
 .footer-links a,
 .footer-copy {
   font-size: 13px;
-  color: var(--ink-muted);
+  color: var(--ink-onbg-soft);
 }
 .footer-links a:hover {
   color: var(--violet);

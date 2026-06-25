@@ -35,8 +35,6 @@ export const SHIFT = {
 export interface PedigreeLogo {
   src: string;
   alt: string;
-  /** false = render in natural color (skip the ink-tint filter) */
-  tint?: boolean;
 }
 
 export const PEDIGREE: { label: string; logos: PedigreeLogo[] } = {
@@ -46,7 +44,7 @@ export const PEDIGREE: { label: string; logos: PedigreeLogo[] } = {
     { src: "/logos/mckinsey.svg", alt: "McKinsey & Company" },
     { src: "/logos/william-blair.svg", alt: "William Blair" },
     { src: "/logos/cambridge.svg", alt: "University of Cambridge" },
-    { src: "/logos/bank-of-georgia.svg", alt: "Bank of Georgia", tint: false },
+    { src: "/logos/bank-of-georgia.svg", alt: "Bank of Georgia" },
   ],
 };
 

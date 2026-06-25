@@ -1,6 +1,6 @@
 export function SiteFooter() {
   return (
-    <footer className="site-footer band-paper">
+    <footer className="site-footer">
       <div className="container footer-inner">
         <a className="nav-logo" href="#top" aria-label="Agent X Labs - home">
           {/* eslint-disable-next-line @next/next/no-img-element */}
