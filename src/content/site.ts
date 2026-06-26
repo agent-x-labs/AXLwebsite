@@ -34,17 +34,19 @@ export const SHIFT = {
 
 export interface PedigreeLogo {
   src: string;
+  /** dark-background variant (white wordmark, or colour mark with white text) */
+  dark: string;
   alt: string;
 }
 
 export const PEDIGREE: { label: string; logos: PedigreeLogo[] } = {
   label: "Built by operators who've delivered at",
   logos: [
-    { src: "/logos/morgan-stanley.svg", alt: "Morgan Stanley" },
-    { src: "/logos/mckinsey.svg", alt: "McKinsey & Company" },
-    { src: "/logos/william-blair.svg", alt: "William Blair" },
-    { src: "/logos/cambridge.svg", alt: "University of Cambridge" },
-    { src: "/logos/bank-of-georgia.png", alt: "Bank of Georgia" },
+    { src: "/logos/morgan-stanley.svg", dark: "/logos/morgan-stanley-dark.svg", alt: "Morgan Stanley" },
+    { src: "/logos/mckinsey.svg", dark: "/logos/mckinsey-dark.svg", alt: "McKinsey & Company" },
+    { src: "/logos/william-blair.svg", dark: "/logos/william-blair-dark.svg", alt: "William Blair" },
+    { src: "/logos/cambridge.svg", dark: "/logos/cambridge-dark.svg", alt: "University of Cambridge" },
+    { src: "/logos/bank-of-georgia.svg", dark: "/logos/bank-of-georgia-dark.svg", alt: "Bank of Georgia" },
   ],
 };
 
