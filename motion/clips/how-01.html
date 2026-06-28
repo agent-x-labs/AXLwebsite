@@ -7,9 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
     <style>
       #card { left: 300px; top: 150px; width: 1320px; height: 780px; }
-      #hd { position: absolute; left: 360px; top: 206px; }
-      #hd .step { font-family: var(--display); font-weight: 600; font-size: 30px; letter-spacing: 0.12em; color: var(--violet); }
-      #hd .ttl { font-family: var(--display); font-weight: 600; font-size: 76px; letter-spacing: -0.02em; margin-top: 12px; }
+      #content { position: absolute; inset: 0; transform: translateY(-80px); }
       .funnel { position: absolute; left: 360px; top: 432px; width: 1200px; }
       .bar { position: relative; height: 104px; border-radius: 18px; margin-bottom: 30px;
         display: flex; align-items: center; padding: 0 34px; color: var(--ink); font-family: var(--display); font-weight: 600; font-size: 38px; }
@@ -30,15 +28,15 @@
     <div id="stage" class="stage" data-composition-id="how-01" data-width="1920" data-height="1080" data-start="0" data-duration="6">
       <div class="ambient"></div>
       <div id="card" class="card"></div>
-      <div id="hd"><div class="step">STEP 01</div><div class="ttl">Strategy call</div></div>
-
-      <div class="funnel">
-        <div class="bar" id="bar1">Leads in <span class="n">100%</span></div>
-        <div class="bar" id="bar2">Answered <span class="n">63%</span></div>
-        <div class="bar" id="bar3">Booked <span class="n">31%</span></div>
+      <div id="content">
+        <div class="funnel">
+          <div class="bar" id="bar1">Leads in <span class="n">100%</span></div>
+          <div class="bar" id="bar2">Answered <span class="n">63%</span></div>
+          <div class="bar" id="bar3">Booked <span class="n">31%</span></div>
+        </div>
+        <div id="scan"></div>
+        <div id="leak"><div class="stem"></div><div class="pin"><span class="d"></span>Where you’re leaking revenue</div></div>
       </div>
-      <div id="scan"></div>
-      <div id="leak"><div class="stem"></div><div class="pin"><span class="d"></span>Where you’re leaking revenue</div></div>
       <div class="grain"></div>
 
       <script>
