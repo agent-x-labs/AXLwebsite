@@ -1,87 +1,69 @@
-# HyperFrames Composition Project
+# motion/ — Agent X Labs animation clips
 
-## Skills — USE THESE FIRST
+A HeyGen HyperFrames project that renders the site's looping clips. They embed in the
+agent cards (`#agents`) and the how-it-works steps (`#how`), played by
+`src/components/hyper-video.tsx`. **Sources** are `clips/*.html`; the **rendered output**
+(MP4 / WebM / poster) is committed into the site's `/public`, not here.
 
-**Always invoke the relevant skill before writing or modifying compositions.** Skills encode framework-specific patterns (e.g., `window.__timelines` registration, `data-*` attribute semantics, shader-compatible CSS rules) that are NOT in generic web docs. Skipping them produces broken compositions.
+## Clips → where they embed
 
-**Doing anything with HyperFrames?** Start at `/hyperframes` — it tells you what HyperFrames can do and which skill or workflow handles your intent (make a video, TTS / BGM, prep footage, author / animate, render, install blocks), and routes every "make me a video" request to the right workflow. Read it first, especially when there's no project context to orient you. The video workflows it routes to:
+| clip source | `/public` output | shown in |
+|---|---|---|
+| `clips/reception.html` | `agents/reception-agent.*` | agent card |
+| `clips/lead-reactivation.html` | `agents/lead-reactivation-agent.*` | agent card |
+| `clips/after-sales.html` | `agents/after-sales-agent.*` | agent card |
+| `clips/content-marketing.html` | `agents/content-marketing-agent.*` | agent card |
+| `clips/how-01.html … how-03.html` | `how/01.* … 03.*` | how-it-works steps |
 
-- `/product-launch-video` — a **product** URL or brief / script → 60-90s product launch / SaaS / promo video.
-- `/website-to-video` — a **general** website / URL → a video _of_ the site (tour / showcase / social clip from captured visuals); a product **launch / promo** is `/product-launch-video`.
-- `/faceless-explainer` — arbitrary text (topic / article / notes), **no URL, no website capture** → 60-90s faceless explainer.
-- `/embedded-captions` — an existing talking-head video (MP4) → the same footage with captions / subtitles added (rail + embed, or pure-cinematic embed); the footage itself is untouched.
-- `/graphic-overlays` — an existing talking-head / interview / podcast video (MP4) → the same footage **packaged with designed graphic overlays** (kinetic titles, lower-thirds, data callouts, pull-quotes, side panels, pip) synced to the transcript; the clip plays unchanged underneath. (Plain captions/subtitles → `/embedded-captions`.)
-- `/pr-to-video` — a GitHub PR (URL / `owner/repo#N` / "this PR") → 30-90s code-change explainer (changelog / feature reveal / fix / refactor).
-- `/motion-graphics` — a short (typically under 10s) design-led **motion graphic**, motion-is-the-message, no narration: kinetic type, a stat / number count-up, a chart, a logo sting, a lower-third / overlay, or an animated tweet / headline / captured-page highlight; rendered to MP4 or a transparent overlay. Longer / narrated / custom → `/general-video`.
-- `/general-video` — fallback for any other video (title card, longer brand / sizzle reel, multi-scene montage, static loop, custom composition); the original hyperframes authoring flow, any length.
+Shared design tokens + UI primitives live in `clips/_kit.css`. The how-step clips are
+*visual only* — the step number/title come from the page (`STEPS` in `src/content/site.ts`),
+so don't bake labels into those clips.
 
-**Porting an existing composition?** `/remotion-to-hyperframes` translates a Remotion (React) composition into HyperFrames HTML — a source migration, separate from the creation workflows above.
+## Workflow (edit → ship a clip)
 
-The domain skills (`/hyperframes-core`, `/hyperframes-animation`, `/hyperframes-creative`, `/hyperframes-cli`, `/hyperframes-media`, `/hyperframes-registry`) and the full capability map live inside `/hyperframes` — it is the single source of truth for which skill handles which intent.
+1. Edit `clips/<name>.html`.
+2. `node build.mjs` — **inlines `_kit.css`** into each clip → `build/`. The external
+   `<link rel="stylesheet" href="_kit.css">` does NOT load under standalone `-c` rendering,
+   so always render from `build/`, never `clips/`.
+3. `npx hyperframes@0.7.6 render -c build/<name>.html -o renders/<name>.mp4 -q high`
+   (do NOT use `npm run render` — that targets `index.html`, the gallery view).
+4. WebM + poster via ffmpeg: WebM `-c:v libvpx-vp9 -b:v 0 -crf 33 -an`; poster = a
+   representative mid-animation frame (`-ss <t> -frames:v 1`).
+5. Copy all three into `/public` at the path above, `git add` them plus the `clips/`
+   source, and deploy as usual (push to `master`).
 
-> **Tailwind v4 projects** (`hyperframes init --tailwind`): see `/hyperframes-core` → `references/tailwind.md`.
+`build/` and `renders/` are gitignored (regenerable). `clips/` is the source of truth.
 
-> **Skills not available or need updating?** Run `npx skills add heygen-com/hyperframes`
-> and restart the agent session so the new skills load.
+## Hard rules (violating these silently breaks the render)
 
-## Commands
+- **Visual state changes must be GSAP tweens — never timeline callbacks or `classList`
+  toggles.** The renderer seeks the timeline (plus a static-frame pass), so callbacks fire
+  non-deterministically. Cross-fade duplicated elements, fade overlay rings, animate
+  properties.
+- **`immediateRender: false` on every loop-back `from`/`fromTo`.** The default (`true`)
+  applies the "from" state at t=0, hiding something that should be visible in the first frame.
+- **`index.html` must exist** or `render -c` fails with "No composition found" — and
+  `--quiet` hides that, so a stale earlier render ships silently. After re-rendering, confirm
+  the output file's size/mtime actually changed before copying to `/public`.
+- Deterministic only: no `Math.random()`, `Date.now()`, `new Date()`, or network fetches.
+- Design each clip to **loop seamlessly** (t0 visual state == t_end state); the reset tweens
+  at the end of the timeline restore the start state.
+- **No em dashes** in on-clip text (site-wide style — use hyphens).
 
-```bash
-npm run dev          # start the preview server (long-running — keep it alive in background)
-npm run check        # lint + validate + inspect
-npm run render       # render to MP4
-npm run publish      # publish and get a shareable link
-npx hyperframes lint --verbose  # include info-level findings
-npx hyperframes lint --json     # machine-readable output for CI
-npx hyperframes docs <topic> # reference docs in terminal
-```
+Verify a render by extracting frames with ffmpeg and looking at them — there is no automated test.
 
-> **`npm run dev` is a long-running server, not a one-shot command.** It blocks until stopped.
-> In Claude Code, always run it with `run_in_background: true`. Never run it as a foreground
-> command — it will time out and the server will die, breaking the browser preview.
+---
 
-## Documentation
+## HyperFrames framework reference
 
-**For quick reference**, use the local CLI docs command (no network required):
+For authoring/animation patterns, use the HyperFrames skills (`/hyperframes-animation`,
+`/hyperframes-core`); `/hyperframes` is the capability map. Terminal docs (no network):
+`npx hyperframes docs <topic>` (`data-attributes`, `gsap`, `compositions`, `rendering`,
+`troubleshooting`). If the skills aren't installed: `npx skills add heygen-com/hyperframes`
+and restart the session.
 
-```bash
-npx hyperframes docs <topic>
-```
-
-Topics: `data-attributes`, `gsap`, `compositions`, `rendering`, `examples`, `troubleshooting`
-
-**For full documentation**, discover pages via the machine-readable index — do NOT guess URLs:
-
-```
-https://hyperframes.heygen.com/llms.txt
-```
-
-## Project Structure
-
-- `index.html` — main composition (root timeline)
-- `compositions/` — sub-compositions referenced via `data-composition-src`
-- `meta.json` — project metadata (id, name)
-- `transcript.json` — whisper word-level transcript (if generated)
-
-## Linting — ALWAYS RUN AFTER CHANGES
-
-After creating or editing any `.html` composition, **always** run the full check before considering the task complete:
-
-```bash
-npm run check
-```
-
-Fix all errors before presenting the result. Inspect warnings should be reviewed before rendering.
-
-## Key Rules
-
-1. Every timed element needs `data-start`, `data-duration`, and `data-track-index`
-2. Elements with timing **MUST** have `class="clip"` — the framework uses this for visibility control
-3. Timelines must be paused and registered on `window.__timelines`:
-   ```js
-   window.__timelines = window.__timelines || {};
-   window.__timelines["composition-id"] = gsap.timeline({ paused: true });
-   ```
-4. Videos use `muted` with a separate `<audio>` element for the audio track
-5. Sub-compositions use `data-composition-src="compositions/file.html"` to reference other HTML files
-6. Only deterministic logic — no `Date.now()`, no `Math.random()`, no network fetches
+Framework essentials every composition relies on:
+- Timed elements need `class="clip"` + `data-start` / `data-duration` / `data-track-index`.
+- The timeline must be created `paused` and registered:
+  `window.__timelines["<composition-id>"] = gsap.timeline({ paused: true })`.
+- `meta.json` holds the project id/name; sub-compositions load via `data-composition-src`.
